@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# Python (per target layout in CLAUDE.md)
+venv/
+__pycache__/
+*.py[cod]
+
+# Local scratch
+scratch/
+*.log

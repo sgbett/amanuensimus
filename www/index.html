@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!--
+  provenance:
+    artefact:      amanuensimus website — manifesto (prototype)
+    produced:      2026-08-15
+    session:       Claude Code (Claude Opus 4.8, Anthropic)
+    author:        Simon Bettison — framework, direction, decisions
+    collaborator:  model — prose, second voice, layout; iteratively directed and reviewed
+    responsibility: Simon Bettison
+    note:          several passages resist attribution to either hand. That is the subject, not a defect.
+-->
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amanuensimus</title>
+<meta name="description" content="A framework for honest, disclosed collaboration between human authors and AI — and for the reading that keeps the compact.">
+<style>
+  :root{
+    --ink:       #171717;  /* the human hand — full ink            */
+    --graphite:  #6f6f6f;  /* the second voice — the lighter hand  */
+    --ground:    #ffffff;  /* page                                 */
+    --rule:      #171717;  /* the one mark: the divide             */
+    --serif: Georgia, "Times New Roman", Times, serif;
+    --mono:  ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ font-size: 112.5%; }              /* ~18px */
+
+  body{
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Two columns, always. The work, and the work behind the work. */
+  .spread{
+    display: grid;
+    grid-template-columns: 1fr 1fr;       /* peer columns, not a sidenote rail */
+    max-width: 78rem;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+  .work{
+    padding: 7vh 4rem 7vh clamp(1.5rem, 8vw, 7rem);
+  }
+
+  /* The lighter hand: monospace, graphite. Set apart by letterform and by weight of ink. */
+  .behind{
+    padding: 7vh clamp(1.5rem, 8vw, 7rem) 7vh 4rem;
+    border-left: 2px solid var(--rule);   /* THE central rule — the hard, legible divide */
+    font-family: var(--mono);
+    color: var(--graphite);
+    font-size: 0.8rem;
+    line-height: 1.7;
+  }
+
+  .wordmark{
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+    margin: 0 0 4rem 0;
+  }
+
+  .hero{
+    font-size: 1.7rem;
+    line-height: 1.3;
+    margin: 0 0 2.4rem 0;
+  }
+
+  .work p{ margin: 0 0 1.3rem 0; max-width: 34rem; }
+
+  .stance{
+    font-size: 1.12rem;
+    margin: 2.6rem 0 1.3rem 0;
+  }
+
+  /* The credo — set apart by space and size, not by chrome. */
+  .credo{
+    font-style: italic;
+    font-size: 1.5rem;
+    line-height: 1.35;
+    margin: 3rem 0;
+    max-width: 34rem;
+  }
+
+  .pillars{ margin: 0 0 1.3rem 0; max-width: 34rem; }
+  .pillars p{ margin: 0 0 0.9rem 0; }
+  .pillars b{ font-weight: 700; }
+
+  .further{
+    margin-top: 3.2rem;
+    font-size: 0.95rem;
+  }
+
+  a{ color: inherit; text-underline-offset: 0.15em; }
+
+  /* The work behind the work */
+  .behind .lede{ margin: 0 0 2.4rem 0; }
+  .note{ margin: 0 0 2rem 0; }
+  .note .key{
+    display: block;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.68rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .disclosure{ margin-top: 3.4rem; }
+  .disclosure .key{
+    display: block;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.68rem;
+    margin-bottom: 0.8rem;
+  }
+  .disclosure p{ margin: 0 0 0.9rem 0; }
+
+  /* Narrow / mobile: the same hard rule rotates from vertical to horizontal. */
+  @media (max-width: 48rem){
+    .spread{ grid-template-columns: 1fr; max-width: 40rem; min-height: 0; }
+    .work{ padding: 6vh 7vw 0 7vw; }
+    .behind{
+      border-left: 0;
+      border-top: 2px solid var(--rule);  /* the divide, rotated */
+      margin-top: 4vh;
+      padding: 5vh 7vw 8vh 7vw;
+    }
+    .work p, .credo, .pillars, .hero{ max-width: none; }
+  }
+</style>
+</head>
+<body>
+<main class="spread">
+
+  <article class="work">
+    <p class="wordmark">Amanuensimus</p>
+
+    <p class="hero">The question was never whether a human typed this. It was whether anyone thought it through.</p>
+
+    <p>Two failure modes have the field in a pincer. One is undisclosed AI use meant to deceive — the slop flood that trains everyone to flinch. The other is the flinch itself: the reflex that rejects anything that <em>looks</em> AI-touched, judging the rendering instead of the thinking. Between them sits work that was genuinely thought through and honestly disclosed — penalised by the second reflex, and made to look naïve by the first.</p>
+
+    <p>Amanuensimus is the infrastructure for that middle case. It makes honest collaboration between a human author and a model tractable: the ideas remain the author's, the labour is divided in the open, and the reader is given what they need to judge accordingly.</p>
+
+    <p class="stance">Attribution follows responsibility, not keystrokes.</p>
+
+    <p>Ideas were never wholly internal. The test of authorship has always been whether you can defend a thing under scrutiny you did not rehearse for, extend it to cases you never discussed, and answer for its consequences. Pass that, and the causal chain — read, thought, prompted, revised — is uninteresting; the work is yours. Fail it, and you have the appearance of an idea, not the idea. The bar is stricter than <em>I typed it myself</em>, and more honest. It falls equally on AI-assisted work, half-remembered lectures, and undigested reading.</p>
+
+    <p class="credo">We did this. I answer for it.</p>
+
+    <div class="pillars">
+      <p>Four commitments hold the framework together.</p>
+      <p><b>Voice fidelity</b> — prose that keeps the author's voice, verified by measurement rather than asserted by a prompt.</p>
+      <p><b>Disclosure integrity</b> — every artefact carries a machine-readable record of the collaboration, and renders it into a disclosure a reader can weigh.</p>
+      <p><b>Bias mitigation</b> — an evidence-first method, with adversarial review held in fresh, uncontaminated sessions, because the best-intentioned mind cannot audit itself from the inside.</p>
+      <p><b>Reader-side integrity</b> — tools for the other half of the compact, because new writing norms are stranded without new reading ones.</p>
+    </div>
+
+    <p>This is early, and it is meant to be argued with. If the position is wrong, or the practice insufficient, the answer is revision, not defence.</p>
+
+    <p class="further"><a href="../VISION.md">Vision</a> &nbsp;·&nbsp; <a href="../ETHICS.md">Ethics</a> &nbsp;·&nbsp; <a href="#">The proof case</a></p>
+  </article>
+
+  <aside class="behind">
+    <p class="lede">The work behind the work. The second hand — the model's — keeps its notes here, and the making-of is set down at the foot. Where one hand stopped and the other began is, by now, unrecoverable. That is not a flaw in the record; it is the record's subject.</p>
+
+    <div class="note">
+      <span class="key">On the opening</span>
+      The first line is Simon's, carried over from the ethics document and cut down for the page. Cut down by whom is the question this whole column exists to hold. Neither of us could now separate it cleanly.
+    </div>
+
+    <div class="note">
+      <span class="key">On the divide</span>
+      The line down the middle of this page is exact. The division it stands for — his thought from mine — is not. The site sets the legible divide against the illegible one on purpose. You are reading the argument as layout.
+    </div>
+
+    <div class="note">
+      <span class="key">On responsibility</span>
+      Note that the credo raises the bar rather than lowering it. <em>The model misled me</em> is not a defence here; it is an admission of not having checked. Anyone arguing for this kind of authorship is accepting stricter liability, not laxer.
+    </div>
+
+    <div class="note">
+      <span class="key">On this voice</span>
+      This hand is set in a monospace, the human hand in a serif — the two made legible as letterforms, and by weight of ink. The lighter hand is the model's. A convention, openly declared; not a claim that the boundary is really so clean.
+    </div>
+
+    <div class="disclosure">
+      <span class="key">Provenance</span>
+      <p>This page was produced in a Claude Code session with Simon Bettison (Claude Opus 4.8, Anthropic, 15 August 2026). The framework, the argument and the decisions are Simon's; the prose and this second voice are the model's, iteratively directed and reviewed.</p>
+      <p>Several turns of phrase resist attribution to either hand — which is the point. This page grew out of a long and personal conversation; the personal content in it is Simon's own, shared willingly. No third party's private data or proprietary material was involved.</p>
+      <p>Simon takes responsibility for what is said here. Argue with it.</p>
+    </div>
+  </aside>
+
+</main>
+</body>
+</html>
