@@ -1,0 +1,60 @@
+{
+  "CallerReference": "amanuensimus-site-v1",
+  "Aliases": { "Quantity": 2, "Items": ["amanuensimus.com", "www.amanuensimus.com"] },
+  "DefaultRootObject": "index.html",
+  "Origins": {
+    "Quantity": 1,
+    "Items": [
+      {
+        "Id": "s3-amanuensimus-site",
+        "DomainName": "amanuensimus-site.s3.us-east-1.amazonaws.com",
+        "OriginPath": "",
+        "CustomHeaders": { "Quantity": 0 },
+        "S3OriginConfig": { "OriginAccessIdentity": "" },
+        "OriginAccessControlId": "EUTAZWU86XD3A",
+        "ConnectionAttempts": 3,
+        "ConnectionTimeout": 10,
+        "OriginShield": { "Enabled": false }
+      }
+    ]
+  },
+  "OriginGroups": { "Quantity": 0 },
+  "DefaultCacheBehavior": {
+    "TargetOriginId": "s3-amanuensimus-site",
+    "TrustedSigners": { "Enabled": false, "Quantity": 0 },
+    "TrustedKeyGroups": { "Enabled": false, "Quantity": 0 },
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "AllowedMethods": {
+      "Quantity": 2,
+      "Items": ["GET", "HEAD"],
+      "CachedMethods": { "Quantity": 2, "Items": ["GET", "HEAD"] }
+    },
+    "SmoothStreaming": false,
+    "Compress": true,
+    "LambdaFunctionAssociations": { "Quantity": 0 },
+    "FunctionAssociations": {
+      "Quantity": 1,
+      "Items": [
+        { "FunctionARN": "arn:aws:cloudfront::777069377324:function/amanuensimus-www-redirect", "EventType": "viewer-request" }
+      ]
+    },
+    "FieldLevelEncryptionId": "",
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+  },
+  "CacheBehaviors": { "Quantity": 0 },
+  "CustomErrorResponses": { "Quantity": 0 },
+  "Comment": "amanuensimus.com",
+  "Logging": { "Enabled": false, "IncludeCookies": false, "Bucket": "", "Prefix": "" },
+  "PriceClass": "PriceClass_100",
+  "Enabled": true,
+  "ViewerCertificate": {
+    "CloudFrontDefaultCertificate": false,
+    "ACMCertificateArn": "arn:aws:acm:us-east-1:777069377324:certificate/18eea307-d74d-4c6f-a400-37cebd91e0f8",
+    "SSLSupportMethod": "sni-only",
+    "MinimumProtocolVersion": "TLSv1.2_2021"
+  },
+  "Restrictions": { "GeoRestriction": { "RestrictionType": "none", "Quantity": 0 } },
+  "WebACLId": "",
+  "HttpVersion": "http2and3",
+  "IsIPV6Enabled": true
+}
