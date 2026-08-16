@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 6 128 128">
+  <title>Amanuensimus</title>
+  <!-- The paraph: a pilcrow split between two hands. Inner stem in ink (the first hand),
+       bowl and outer stem in graphite (the second). Mono-safe rubrication — no hue yet. -->
+  <path fill="none" stroke="#6f6f6f" stroke-width="12" d="M54 12 H36 A26 26 0 0 0 36 64 H54"/>
+  <line stroke="#171717" stroke-width="12" x1="54" y1="6" x2="54" y2="134"/>
+  <line stroke="#6f6f6f" stroke-width="12" x1="84" y1="6" x2="84" y2="134"/>
+</svg>

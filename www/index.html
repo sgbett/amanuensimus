@@ -15,6 +15,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Amanuensimus</title>
 <meta name="description" content="A framework for honest, disclosed collaboration between human authors and AI — and for the reading that keeps the compact.">
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://amanuensimus.com/">
+<meta property="og:title" content="Amanuensimus">
+<meta property="og:description" content="The question was never whether a human typed this. It was whether anyone thought it through.">
+<meta property="og:image" content="https://amanuensimus.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The credo &quot;We did this. I answer for it.&quot; straddling a single rule.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Amanuensimus">
+<meta name="twitter:description" content="The question was never whether a human typed this. It was whether anyone thought it through.">
+<meta name="twitter:image" content="https://amanuensimus.com/og.png">
 <style>
   :root{
     --ink:       #171717;  /* the human hand — full ink            */
@@ -55,17 +70,38 @@
   /* The lighter hand: monospace, graphite. Set apart by letterform and by weight of ink. */
   .behind{
     padding: 7vh clamp(1.5rem, 8vw, 7rem) 7vh 4rem;
-    border-left: 2px solid var(--rule);   /* THE central rule — the hard, legible divide */
+    border-left: 1px solid var(--rule);   /* THE central rule — the hard, legible divide */
     font-family: var(--mono);
     color: var(--graphite);
     font-size: 0.8rem;
     line-height: 1.7;
   }
 
+  /* Column heads, equal min-height, bottom-aligned — so the credo halves that sit
+     below them meet across the rule. */
+  .head{
+    min-height: 3.5rem;
+    display: flex;
+    align-items: flex-end;
+    margin: 0 0 2.4rem 0;
+  }
   .wordmark{
-    font-size: 1.05rem;
-    letter-spacing: 0.02em;
-    margin: 0 0 4rem 0;
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+    line-height: 1;
+    letter-spacing: -0.015em;
+    font-weight: 400;
+    margin: 0;
+  }
+  .behind-label{
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--graphite);
+    line-height: 1.4;
+    margin: 0;
+    width: 100%;
+    text-align: right;
   }
 
   .hero{
@@ -81,14 +117,24 @@
     margin: 2.6rem 0 1.3rem 0;
   }
 
-  /* The credo — set apart by space and size, not by chrome. */
+  /* The wordmark graft — 'mus', the tail of animus, in the second hand's tone. */
+  .graft{ color: var(--graphite); }
+
+  /* The credo straddles the rule as one line, hinged at the making → answering pivot.
+     It stays the author's voice — serif, ink — on both sides, never the mono of the
+     apparatus column: it is the signature over the whole page, not part of either column. */
   .credo{
+    font-family: var(--serif);
+    color: var(--ink);
     font-style: italic;
     font-size: 1.5rem;
-    line-height: 1.35;
-    margin: 3rem 0;
-    max-width: 34rem;
+    line-height: 1.3;
+    margin: 0 0 3.2rem 0;
   }
+  /* Scoped one level deeper than `.work p`, whose paragraph margin would otherwise
+     win on specificity and cancel the pull toward the rule. */
+  .work .credo-l{ text-align: right; margin: 0 -2.3rem 3.2rem 0; }
+  .behind .credo-r{ text-align: left;  margin: 0 0 3.2rem -2.3rem; }
 
   .pillars{ margin: 0 0 1.3rem 0; max-width: 34rem; }
   .pillars p{ margin: 0 0 0.9rem 0; }
@@ -130,11 +176,13 @@
     .work{ padding: 6vh 7vw 0 7vw; }
     .behind{
       border-left: 0;
-      border-top: 2px solid var(--rule);  /* the divide, rotated */
+      border-top: 1px solid var(--rule);  /* the divide, rotated */
       margin-top: 4vh;
       padding: 5vh 7vw 8vh 7vw;
     }
     .work p, .credo, .pillars, .hero{ max-width: none; }
+    .work .credo-l, .behind .credo-r{ text-align: left; margin: 0 0 1.6rem 0; }
+    .head{ min-height: 0; margin-bottom: 1.6rem; }
   }
 </style>
 </head>
@@ -142,7 +190,9 @@
 <main class="spread">
 
   <article class="work">
-    <p class="wordmark">Amanuensimus</p>
+    <div class="head"><h1 class="wordmark">amanuensi<span class="graft">mus</span></h1></div>
+
+    <p class="credo credo-l">We did this.</p>
 
     <p class="hero">The question was never whether a human typed this. It was whether anyone thought it through.</p>
 
@@ -153,8 +203,6 @@
     <p class="stance">Attribution follows responsibility, not keystrokes.</p>
 
     <p>Ideas were never wholly internal. The test of authorship has always been whether you can defend a thing under scrutiny you did not rehearse for, extend it to cases you never discussed, and answer for its consequences. Pass that, and the causal chain — read, thought, prompted, revised — is uninteresting; the work is yours. Fail it, and you have the appearance of an idea, not the idea. The bar is stricter than <em>I typed it myself</em>, and more honest. It falls equally on AI-assisted work, half-remembered lectures, and undigested reading.</p>
-
-    <p class="credo">We did this. I answer for it.</p>
 
     <div class="pillars">
       <p>Four commitments hold the framework together.</p>
@@ -171,7 +219,11 @@
   </article>
 
   <aside class="behind">
-    <p class="lede">The work behind the work. The second hand — the model's — keeps its notes here, and the making-of is set down at the foot. Where one hand stopped and the other began is, by now, unrecoverable. That is not a flaw in the record; it is the record's subject.</p>
+    <div class="head"><p class="behind-label">The work behind the work</p></div>
+
+    <p class="credo credo-r">I answer for it.</p>
+
+    <p class="lede">The second hand — the model's — keeps its notes here, and the making-of is set down at the foot. Where one hand stopped and the other began is, by now, unrecoverable. That is not a flaw in the record; it is the record's subject.</p>
 
     <div class="note">
       <span class="key">On the opening</span>
