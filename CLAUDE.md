@@ -36,9 +36,9 @@ Relationship with other projects:
 - `/opt/claude/support-responder` — downstream domain-specific consumer of the voice-fidelity capability
 - `/opt/claude/hand-rolled-secp256k1-lit-review` — archetype / proof case; the paper is the demonstration this framework generalises. Section 1.2 of `review-final.md` is the canonical disclosure exemplar.
 
-## Directory layout (target)
+## Directory layout
 
-Kept intentionally sparse while scope solidifies.
+Kept intentionally sparse while scope solidifies. The site (`www/`) and its deployment (`infra/`) exist; the Python package is still target.
 
 ```
 amanuensimus/
@@ -46,7 +46,9 @@ amanuensimus/
 ├── VISION.md              # mission, four pillars, boundaries, roadmap
 ├── ETHICS.md              # philosophical position, disclosure practice
 ├── docs/                  # research notes, disclosure templates, worked examples
-├── amanuensimus/          # Python package (name may evolve)
+├── www/                   # amanuensimus.com — the static manifesto site
+├── infra/                 # deployment: deploy script, CloudFront + redirect config
+├── amanuensimus/          # Python package (name may evolve) — not yet built
 │   ├── voice/             # voice-fidelity: retrieval, profile, drift
 │   ├── provenance/        # manifest, disclosure generation
 │   ├── bias/              # evidence-first workflow, session hygiene
