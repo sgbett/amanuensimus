@@ -49,7 +49,7 @@ That contrast *is* the extended-mind thesis (Clark and Chalmers, per ETHICS) tur
 
 The site is a framework in Phase 0, not a product — so not a marketing page with calls to action.
 
-The shape: **a manifesto page that (i) states the thesis with conviction, (ii) carries its own live disclosure in the margin, (iii) links out to the deeper docs (VISION, ETHICS) and the proof case (the crypto paper's §1.2), and (iv) has one dated-entry mechanism so it *can* grow without committing to a full blog.**
+The shape: **a manifesto page that (i) states the thesis with conviction, (ii) carries its own live disclosure in the margin, (iii) will link out to the deeper docs (VISION, ETHICS) and the proof case (the crypto paper's §1.2) once those are published as pages — deferred for now rather than shipped as broken links, and (iv) has one dated-entry mechanism so it *can* grow without committing to a full blog.**
 
 This gives conviction now and extensibility later, and it avoids cloning the `sgbett-com` append-only ledger. Positioning stays deliberately loose: manifesto, gateway and living-document are all reachable from here as the mood takes it.
 
@@ -77,10 +77,12 @@ Warm, editorial, humanist — a bookish register. This is about prose and voice,
   `font-family: Georgia, "Times New Roman", Times, serif;`
 - **Monospace for the second voice and provenance only** — kept out of the reading voice, a quiet nod to the machine hand. Pinned to a robust system stack (`ui-monospace` first, so it resolves correctly on Apple and Windows; named faces as the net; generic `monospace` as the floor):
   `font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace;`
-- **Greyscale, two-tone by weight of ink.** No hue. Full ink for the human voice; a graphite grey for the second voice. The human/model distinction is carried by *lightness*, not colour — the model's hand is the lighter hand. Exact tones TBD; the system (monochrome, ink / graphite) is locked.
+- **Greyscale, two-tone by weight of ink — hue withheld, not forbidden.** Full ink for the human voice; a graphite grey for the second voice; the distinction carried by *lightness*, not colour — the model's hand is the lighter hand. No hue *yet*: colour is *withheld* and enters only by a recorded constitutional amendment (see the pigment arc under Roadmap) — rubrication with the colour not-yet-added, the page the rubricator has not reached. Exact tones TBD; the monochrome ink/graphite system is locked for now.
+- **The wordmark is a two-hands artefact.** Set lowercase as a large `h1`: `amanuensi` in ink with the `mus` graft — the tail of *animus* — in the second-hand tone. The name discloses its own construction. (It also parses as a Latin superlative, *-imus*: most scribe-like.)
+- **The credo straddles the rule.** "We did this. I answer for it." is set as one line hinged on the rule — "We did this." heading the work, "I answer for it." heading the account — serif and ink on both sides (the author's voice, never the apparatus mono). The rule is the pivot where shared making yields to sole answering; on mobile it rotates with the divide.
 - **Whitespace does all the structuring — with one exception: the central rule.** No hairlines, no markers, no chrome. The single mark that earns its place is the line dividing the two columns, because that line *is* the thesis (the hard, legible divide set against the illegible one). A gutter of whitespace would not read as *hard*; the concept requires an actual rule.
 - **Peer columns, not a thin sidenote rail.** The two columns sit nearer to equal, divided by the rule — this serves the "both walk either side of it" image, and it is what the mobile behaviour below assumes.
-- **Type is the design.** No hero imagery. The page reads as a considered document, not a landing page.
+- **Type is the design; the only figure is apparatus.** No hero imagery. The one mark is the **paraph** — a pilcrow split between two hands (inner stem ink, bowl and outer stem graphite), used as favicon and social card, mono-safe so it holds before any pigment. Apparatus, not decoration. The page reads as a considered document, not a landing page.
 
 ## Responsive behaviour: the divide rotates
 
@@ -99,6 +101,16 @@ Honest about stage: this is a Phase-0 artefact. It should not overclaim a produc
 
 The site may grow into technology demonstrations, or academic pointers, or neither. That optionality is deliberate and should be visible rather than hidden.
 
+## Roadmap (v2 — deferred, from the design-session exploration)
+
+Explored and reconciled, not yet built. Each is deliberately held back from v1:
+
+- **The pigment arc (rubrication).** Colour is withheld, not absent, and arrives by amendment when weight-of-ink alone cannot separate hands: *minium* (red) for the model's hand — beginning with the graft — and *azurite* (blue) for the reader's, once reader-side tooling exists. Historically grounded (the rubricator worked last, in red); semantic, never decorative; never on the rule (the rule is not a hand). Each expansion is a recorded constitutional amendment with a stated objection.
+- **The voicing gauge.** The site declares how voiced its prose is (0 = unvoiced model output → 3 = indiscernible from the author) as a manifest field. The design advances *with* the voice, on an anonymous→particular axis, never plain→polished. The interactive dial is a study device; production renders at the declared level only, advancing only when the voice-fidelity pillar can actually move it.
+- **Design as amendment, not version.** The visual system enrols in the project's own anti-erasure mechanism: one token at a time, by trigger not schedule, with declared sympathies; the living statement renders at current tokens while dated artefacts freeze at issue, so reading down the archive is reading the evolution.
+
+Locked regardless: two columns, the rule (1px, full ink), the graft in the second hand's tone.
+
 ## Open threads
 
 The visual system is otherwise locked (see above). Deliberately still unresolved, to decide when the mood or the build requires it:
@@ -112,7 +124,7 @@ The visual system is otherwise locked (see above). Deliberately still unresolved
 
 ## Provenance
 
-Produced in a Claude Code session with Simon Bettison (Claude Opus 4.8, Anthropic, 15 August 2026).
+Produced with Simon Bettison across Claude Code sessions (Claude Opus 4.8, Anthropic, 15–16 August 2026), incorporating a separate claude.ai design exploration reconciled here.
 
 The framework, the direction and the decisions are Simon's; the prose, the structuring and much of the option-generation are the model's, iteratively directed and reviewed. Several load-bearing moves emerged in the exchange itself and cannot be cleanly assigned to one hand — the "minimally styled, not unstyled" reframe, the greyscale two-tone by weight of ink, the rotate-the-divide behaviour. That they resist attribution is the point: here, as on the site this brief describes, the legible divide is a fiction over an illegible one, and attribution follows responsibility, not authorship of individual sentences.
 
