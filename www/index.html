@@ -170,6 +170,19 @@
   }
   .disclosure p{ margin: 0 0 0.9rem 0; }
 
+  /* Footer — apparatus below the spread; mono, graphite, whitespace-separated (no rule). */
+  .footer{
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--graphite);
+    letter-spacing: 0.04em;
+    max-width: 78rem;
+    margin: 0 auto;
+    padding: 2.5rem clamp(1.5rem, 8vw, 7rem) 3rem;
+  }
+  .footer a{ color: inherit; text-underline-offset: 0.15em; }
+  .footer .rights{ display: block; margin-top: 0.7rem; }
+
   /* Narrow / mobile: the same hard rule rotates from vertical to horizontal. */
   @media (max-width: 48rem){
     .spread{ grid-template-columns: 1fr; max-width: 40rem; min-height: 0; }
@@ -249,10 +262,17 @@
       <span class="key">Provenance</span>
       <p>This page was produced with Simon Bettison across Claude Code sessions (Claude Opus 4.8, Anthropic, 15–16 August 2026), with some of the visual direction explored in a separate design session. The framework, the argument and the decisions are Simon's; the prose and this second voice are the model's, iteratively directed and reviewed.</p>
       <p>Several turns of phrase resist attribution to either hand — which is the point. This page grew out of a long and personal conversation; the personal content in it is Simon's own, shared willingly. No third party's private data or proprietary material was involved.</p>
-      <p>Simon takes responsibility for what is said here. Argue with it.</p>
+      <p>Simon takes responsibility for what is said here. <a href="https://github.com/sgbett/amanuensimus">Argue with it.</a></p>
     </div>
   </aside>
 
 </main>
+
+<footer class="footer">
+  <a href="https://github.com/sgbett/amanuensimus/blob/master/VISION.md">Vision</a> ·
+  <a href="https://github.com/sgbett/amanuensimus/blob/master/ETHICS.md">Ethics</a> ·
+  <a href="https://github.com/sgbett/amanuensimus">Source</a>
+  <span class="rights">© 2026 Simon Bettison · MIT</span>
+</footer>
 </body>
 </html>
