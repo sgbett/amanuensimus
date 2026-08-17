@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-voicing="0">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amanuensimus — voicing study</title>
+<meta name="description" content="The site rendered at four levels of voice fidelity. The design is a gauge, not a decision.">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   AMANUENSIMUS — VOICING STUDY
+
+   Premise: how designed the page is, is a readout of how
+   voiced the prose is. The visual system is a gauge.
+
+   Two invariants across every state:
+     · the rule            — 1px, full ink, unchanged
+     · the graft           — second tone in the wordmark
+
+   Both assert a divide that becomes progressively harder
+   to perceive. That is the exhibit.
+
+   Governing constraint: the axis is ANONYMOUS → PARTICULAR,
+   not PLAIN → POLISHED. Every state must be equally well
+   made. If a later state simply looks nicer, the system is
+   arguing that effort deserves better rendering — which is
+   the fallacy the manifesto exists to refuse.
+
+   The prose is identical in all four states. Only the
+   setting moves.
+   ═══════════════════════════════════════════════════════════ */
+
+:root{
+  --paper:#FAFAFA;
+  --ink:#141414;
+  --graphite:#737373;
+
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,
+         "Liberation Mono","DejaVu Sans Mono",monospace;
+
+  --gutter:3.25rem;
+}
+
+/* ─── STATE 0 · UNVOICED ────────────────────────────────────
+   Model prose, structural direction only. No conditioning.
+   The screen's default serif. Anonymous on purpose.        */
+[data-voicing="0"]{
+  --work-face:Georgia,"Times New Roman",Times,serif;
+  --work-size:1.0625rem;
+  --work-lh:1.72;
+  --work-gap:1.15rem;
+  --work-indent:0;
+  --work-align:left;
+  --work-hyphens:manual;
+  --work-measure:34rem;
+  --work-track:0;
+
+  --head-style:italic;
+  --head-transform:none;
+  --head-track:.005em;
+  --head-size:1.0625rem;
+
+  --app-face:Georgia,"Times New Roman",Times,serif;
+  --app-size:1.0625rem;
+  --app-lh:1.72;
+  --app-colour:var(--ink);
+  --app-gap:1.15rem;
+  --mani-size:.8125rem;
+  --mani-lh:1.85;
+}
+
+/* ─── STATE 1 · DIRECTED ────────────────────────────────────
+   Author edits at sentence level. Corpus exists; it is not
+   yet conditioning generation. Voice arrives in the setting
+   before it arrives in the face.                           */
+[data-voicing="1"]{
+  --work-face:Georgia,"Times New Roman",Times,serif;
+  --work-size:1.09rem;
+  --work-lh:1.76;
+  --work-gap:1.2rem;
+  --work-indent:0;
+  --work-align:left;
+  --work-hyphens:auto;
+  --work-measure:32.5rem;
+  --work-track:.002em;
+
+  --head-style:normal;
+  --head-transform:uppercase;
+  --head-track:.17em;
+  --head-size:.72rem;
+
+  --app-face:Georgia,"Times New Roman",Times,serif;
+  --app-size:.9375rem;
+  --app-lh:1.68;
+  --app-colour:var(--graphite);
+  --app-gap:1rem;
+  --mani-size:.78rem;
+  --mani-lh:1.8;
+}
+
+/* ─── STATE 2 · CONDITIONED ─────────────────────────────────
+   Retrieval-augmented few-shot from the author's corpus.
+   Drift measured and reported. The face becomes particular;
+   the record goes clerical.                                */
+[data-voicing="2"]{
+  --work-face:Charter,"Bitstream Charter","Iowan Old Style",
+              "Palatino Linotype",Palatino,Georgia,serif;
+  --work-size:1.13rem;
+  --work-lh:1.68;
+  --work-gap:1.15rem;
+  --work-indent:0;
+  --work-align:left;
+  --work-hyphens:auto;
+  --work-measure:31.5rem;
+  --work-track:-.002em;
+
+  --head-style:normal;
+  --head-transform:uppercase;
+  --head-track:.19em;
+  --head-size:.7rem;
+
+  --app-face:var(--mono);
+  --app-size:.8125rem;
+  --app-lh:1.75;
+  --app-colour:var(--graphite);
+  --app-gap:1rem;
+  --mani-size:.78rem;
+  --mani-lh:1.8;
+}
+
+/* ─── STATE 3 · INDISCERNIBLE ───────────────────────────────
+   Drift below threshold. Blind test fails to separate
+   generated from authored. Book setting against machine log.
+   The rule now divides two things that no longer differ in
+   the way it claims.                                       */
+[data-voicing="3"]{
+  --work-face:"Iowan Old Style","Palatino Linotype",Palatino,
+              Charter,Baskerville,Georgia,serif;
+  --work-size:1.16rem;
+  --work-lh:1.62;
+  --work-gap:0;
+  --work-indent:1.35em;
+  --work-align:justify;
+  --work-hyphens:auto;
+  --work-measure:30.5rem;
+  --work-track:-.004em;
+
+  --head-style:normal;
+  --head-transform:uppercase;
+  --head-track:.22em;
+  --head-size:.68rem;
+
+  --app-face:var(--mono);
+  --app-size:.75rem;
+  --app-lh:1.7;
+  --app-colour:var(--graphite);
+  --app-gap:.85rem;
+  --mani-size:.72rem;
+  --mani-lh:1.72;
+}
+
+/* ═══ substrate ═══════════════════════════════════════════ */
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--work-face);
+  font-size:var(--work-size);
+  line-height:var(--work-lh);
+  -webkit-font-smoothing:antialiased;
+}
+
+.spread{
+  max-width:78rem;
+  margin:0 auto;
+  padding:5.5rem 2.5rem 9rem;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr);
+  column-gap:var(--gutter);
+  align-items:start;
+}
+
+/* INVARIANT ONE — the rule. Never changes. */
+.rule{
+  background:#141414;
+  align-self:stretch;
+  width:1px;
+}
+
+.verso,.recto{min-width:0}
+.verso{max-width:var(--work-measure)}
+.recto{max-width:34rem}
+
+/* ─── heads ─────────────────────────────────────────────── */
+
+.head{
+  min-height:4rem;
+  display:flex;
+  align-items:flex-end;
+  margin:0 0 3.25rem;
+}
+
+.wordmark{
+  font-family:var(--work-face);
+  font-size:clamp(1.9rem,5vw,2.85rem);
+  line-height:1;
+  letter-spacing:-.015em;
+  margin:0;
+  font-weight:400;
+}
+/* INVARIANT TWO — the graft. Second tone, always. */
+.wordmark .graft{color:#737373}
+
+.behind{
+  font-family:var(--mono);
+  font-size:.6875rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--graphite);
+  margin:0;
+  line-height:1.4;
+}
+
+.credo{
+  font-family:var(--work-face);
+  font-size:clamp(1.7rem,4.4vw,2.6rem);
+  line-height:1.12;
+  letter-spacing:-.018em;
+  margin:0 0 4.5rem;
+  font-weight:400;
+}
+
+/* ─── the work ──────────────────────────────────────────── */
+
+.verso{
+  font-family:var(--work-face);
+  font-size:var(--work-size);
+  line-height:var(--work-lh);
+  letter-spacing:var(--work-track);
+  hyphens:var(--work-hyphens);
+  -webkit-hyphens:var(--work-hyphens);
+}
+
+.verso p{
+  margin:0 0 var(--work-gap);
+  text-align:var(--work-align);
+  text-indent:var(--work-indent);
+}
+.verso p.flush{text-indent:0}
+.verso p:last-child{margin-bottom:0}
+
+.verso h2{
+  font-family:var(--work-face);
+  font-size:var(--head-size);
+  font-style:var(--head-style);
+  text-transform:var(--head-transform);
+  letter-spacing:var(--head-track);
+  font-weight:400;
+  line-height:1.4;
+  margin:3.5rem 0 1.15rem;
+  text-align:left;
+  text-indent:0;
+}
+.verso > h2:first-of-type{margin-top:0}
+
+.lead{
+  font-size:1.3rem !important;
+  line-height:1.45;
+  margin-bottom:2.6rem !important;
+  text-indent:0 !important;
+  text-align:left !important;
+}
+
+.said{
+  font-size:1.12rem;
+  font-style:italic;
+  line-height:1.5;
+  text-indent:0 !important;
+  text-align:left !important;
+}
+
+.verso ul{list-style:none;margin:0 0 var(--work-gap);padding:0}
+.verso ul li{margin:0 0 .5rem;text-align:left}
+.verso ul li:last-child{margin-bottom:0}
+.pillars li{margin-bottom:1rem}
+.pillars .name{font-style:italic}
+
+.doors li{margin-bottom:1.15rem}
+.doors .gloss{display:block}
+
+a{
+  color:inherit;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:.18em;
+}
+a:hover{text-decoration-thickness:2px}
+em{font-style:italic}
+
+/* ─── the record ────────────────────────────────────────── */
+
+.recto{
+  font-family:var(--app-face);
+  font-size:var(--app-size);
+  line-height:var(--app-lh);
+  color:var(--app-colour);
+}
+.recto p{margin:0 0 var(--app-gap)}
+.recto p:last-child{margin-bottom:0}
+
+.label{
+  font-family:var(--mono);
+  font-size:.6875rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--graphite);
+  margin:3.5rem 0 1.15rem !important;
+}
+.recto > .label:first-of-type{margin-top:0 !important}
+
+.manifest{
+  font-family:var(--mono);
+  font-size:var(--mani-size);
+  line-height:var(--mani-lh);
+  color:var(--graphite);
+  white-space:pre-wrap;
+  margin:0 !important;
+  overflow-wrap:break-word;
+}
+.manifest .h{color:var(--ink)}
+
+/* The author's own statements stay in full ink, in the
+   work's face, at every state. His voice, his liability. */
+.statement{
+  font-family:var(--work-face);
+  font-size:1.0625rem;
+  line-height:1.72;
+  color:var(--ink);
+}
+
+.notes{list-style:none;margin:0;padding:0}
+.notes li{
+  font-family:var(--mono);
+  font-size:var(--mani-size);
+  line-height:1.75;
+  color:var(--graphite);
+  margin-bottom:1.15rem;
+}
+.notes li:last-child{margin-bottom:0}
+
+.amendments{list-style:none;margin:0;padding:0}
+.amendments li{
+  font-family:var(--mono);
+  font-size:var(--mani-size);
+  line-height:1.75;
+  color:var(--graphite);
+  margin-bottom:.5rem;
+}
+
+.colophon{
+  font-family:var(--mono);
+  font-size:.6875rem !important;
+  line-height:1.8;
+  color:var(--graphite);
+  margin:3.5rem 0 0 !important;
+}
+
+/* ─── the gauge ─────────────────────────────────────────── */
+
+.gauge{
+  font-family:var(--mono);
+  font-size:.75rem;
+  line-height:1.7;
+  color:var(--graphite);
+}
+.dial{
+  list-style:none;
+  margin:1.15rem 0 1.4rem;
+  padding:0;
+}
+.dial li{margin:0 0 .3rem}
+.dial button{
+  font-family:var(--mono);
+  font-size:.75rem;
+  line-height:1.7;
+  color:var(--graphite);
+  background:none;
+  border:0;
+  padding:0;
+  margin:0;
+  cursor:pointer;
+  text-align:left;
+  letter-spacing:.02em;
+}
+.dial button:hover{color:var(--ink)}
+.dial button[aria-pressed="true"]{
+  color:var(--ink);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:.2em;
+}
+
+/* state-conditional copy */
+.st{display:none}
+[data-voicing="0"] .st-0,
+[data-voicing="1"] .st-1,
+[data-voicing="2"] .st-2,
+[data-voicing="3"] .st-3{display:block}
+.st-i{display:none}
+[data-voicing="0"] .sti-0,
+[data-voicing="1"] .sti-1,
+[data-voicing="2"] .sti-2,
+[data-voicing="3"] .sti-3{display:inline}
+
+/* ─── the divide rotates ────────────────────────────────── */
+
+@media (max-width:60rem){
+  .spread{
+    grid-template-columns:minmax(0,1fr);
+    padding:3.5rem 1.5rem 6rem;
+  }
+  .verso,.recto{max-width:none}
+  .rule{width:auto;height:1px;margin:4.5rem 0}
+  .head{min-height:0;margin-bottom:2.25rem}
+  .credo{margin-bottom:3rem}
+}
+
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+@media print{
+  body{background:#fff}
+  .spread{padding:0;column-gap:2rem}
+  .gauge{display:none}
+}
+</style>
+</head>
+<body>
+
+<main class="spread">
+
+  <!-- ══════════════ THE WORK ══════════════ -->
+  <div class="verso">
+
+    <div class="head">
+      <h1 class="wordmark">amanuensi<span class="graft">mus</span></h1>
+    </div>
+
+    <p class="credo">We did this.</p>
+
+    <p class="lead flush">The question was never whether a human typed it. It was whether anyone thought it through.</p>
+
+    <h2>The objection</h2>
+
+    <p class="said">&ldquo;If you don&rsquo;t have time to write it, I don&rsquo;t have time to read it.&rdquo;</p>
+
+    <p class="flush">Time is the mask.</p>
+
+    <p>Labour used to be a proxy for thinking. Someone willing to spend a hundred hours on a piece of work had almost certainly spent time thinking about it. That inference held for as long as it was expensive to be wrong.</p>
+
+    <p>AI decoupled labour from thinking, and the proxy broke. So the filter fell back to the last thing still measurable &mdash; <em>does this look AI-generated?</em> &mdash; which sorts on rendering rather than on thought. Wrong axis entirely.</p>
+
+    <p>What the objection means to say is: <em>I don&rsquo;t have time to read work whose author hasn&rsquo;t thought about it.</em> That is a fair thing to want. It is also much harder to measure, which is why almost nobody measures it.</p>
+
+    <h2>The stance</h2>
+
+    <p class="flush">Attribution follows responsibility, not the causal chain. Ideas were never wholly internal; the arranger who completes the pattern has always been the author. So ask the questions that actually discriminate.</p>
+
+    <ul>
+      <li>Can you defend it under scrutiny you didn&rsquo;t rehearse for?</li>
+      <li>Can you apply it to adjacent cases you never discussed with the model?</li>
+      <li>Do you understand its dependencies well enough to notice when they don&rsquo;t hold?</li>
+      <li>Would you take responsibility for its consequences?</li>
+    </ul>
+
+    <p class="flush">If yes, it is yours, and how it got made is philosophically uninteresting.</p>
+
+    <p>If no, you don&rsquo;t have the idea. You have the appearance of one, and the gap will show under any competent questioning.</p>
+
+    <p>This is a stricter bar than <em>I typed it myself</em>, not a laxer one. The collaboration frame raises the accountability: the credit is yours, the labour was distributed, the consequences remain yours, and you had every opportunity to check. <em>The model misled me</em> is not a defence. It is evidence of failure to notice.</p>
+
+    <h2>What is being built</h2>
+
+    <p class="flush">Four pillars, in the order they became necessary.</p>
+
+    <ul class="pillars">
+      <li><span class="name">Voice fidelity</span> &mdash; generation that preserves an author&rsquo;s voice, verified by measurement rather than asserted by prompt.</li>
+      <li><span class="name">Disclosure integrity</span> &mdash; every artefact carries a machine-readable provenance manifest that renders into human-readable disclosure.</li>
+      <li><span class="name">Bias mitigation</span> &mdash; evidence-first method and session hygiene, enforced by the tooling rather than left to discipline.</li>
+      <li><span class="name">Reader-side integrity</span> &mdash; the parallel practice for reading, because the writing norms are stranded without it.</li>
+    </ul>
+
+    <p class="flush">The fourth is the one most likely to matter. New writing norms do not survive contact with old reading norms; everyone who accepts responsibility-based authorship stays marginal for as long as reading practice hasn&rsquo;t caught up.</p>
+
+    <h2>The doors</h2>
+
+    <ul class="doors">
+      <li><a href="/vision">Vision</a><span class="gloss">The four pillars, the boundaries, the roadmap.</span></li>
+      <li><a href="/ethics">Ethics</a><span class="gloss">The philosophical position, and the disclosure practice it obliges.</span></li>
+      <li><a href="/proof">Proof case</a><span class="gloss">A literature review whose &sect;1.2 is the disclosure this project treats as canonical.</span></li>
+    </ul>
+
+    <h2>Where this is</h2>
+
+    <p class="flush">Phase 0. Three documents and a domain. No code yet, deliberately &mdash; the position stabilises before anything is built on it.</p>
+
+    <p>This is a manifesto, not a product. It may grow into working technology, or into academic work, or into neither. That optionality is on purpose and is better stated than hidden.</p>
+
+    <p>It is meant to be argued with. If the position is wrong, or the practice insufficient, or the framing na&iuml;ve, the response is revision rather than defence. Amendments are recorded on the other side of the rule.</p>
+
+  </div>
+
+  <!-- ══════════════ THE RULE ══════════════ -->
+  <div class="rule" role="presentation"></div>
+
+  <!-- ══════════ THE WORK BEHIND THE WORK ══════════ -->
+  <div class="recto">
+
+    <div class="head">
+      <p class="behind">The work behind the work</p>
+    </div>
+
+    <p class="credo">I answer for it.</p>
+
+    <p class="label">Voicing</p>
+
+    <div class="gauge">
+      <p>The prose in the other column is not yet in the author&rsquo;s voice. It is model output, structurally directed and reviewed, with no stylometric conditioning. The page is undesigned for the same reason.</p>
+
+      <p>Those are one fact, so the design states it. How designed this page is, is a readout of how voiced the prose is. As the voice arrives, the work acquires character and the record goes clerical &mdash; the two columns diverge from a common origin.</p>
+
+      <p>Two things never move: the rule, and the graft in the wordmark. Both assert a divide that gets harder to see the further along this scale you go.</p>
+
+      <ul class="dial">
+        <li><button type="button" data-set="0" aria-pressed="true">0 &nbsp;unvoiced &nbsp;&middot;&nbsp; current</button></li>
+        <li><button type="button" data-set="1" aria-pressed="false">1 &nbsp;directed</button></li>
+        <li><button type="button" data-set="2" aria-pressed="false">2 &nbsp;conditioned</button></li>
+        <li><button type="button" data-set="3" aria-pressed="false">3 &nbsp;indiscernible</button></li>
+      </ul>
+
+      <p class="st st-0"><strong>0 &middot; Unvoiced.</strong> Prose generated to the author&rsquo;s direction and accepted after review. No corpus conditioning. The screen&rsquo;s default serif, chosen for being nobody&rsquo;s. Drift unmeasured, because there is nothing yet to measure against.</p>
+
+      <p class="st st-1"><strong>1 &middot; Directed.</strong> The author edits at sentence level. A corpus exists but is not conditioning generation. Voice arrives in the setting before it arrives in the face: the measure tightens, the headings take an interval, the record steps back.</p>
+
+      <p class="st st-2"><strong>2 &middot; Conditioned.</strong> Retrieval-augmented few-shot from the author&rsquo;s own corpus. Drift measured against profile and reported here. The work takes a face that is somebody&rsquo;s; the record goes fully clerical.</p>
+
+      <p class="st st-3"><strong>3 &middot; Indiscernible.</strong> Drift below threshold; a blind test fails to separate generated prose from authored prose. Book setting against machine log. The rule now divides two things that no longer differ in the way it claims &mdash; which is the whole exhibit, and the reason it never moved.</p>
+    </div>
+
+    <p class="label">Provenance</p>
+
+    <p class="manifest"><span class="h">artefact</span>   amanuensimus.com &mdash; statement
+<span class="h">issued</span>     2026-08-16
+<span class="h">author</span>     Simon Bettison
+
+<span class="h">voicing</span>    <span class="st-i sti-0">0 / 3 &mdash; unvoiced</span><span class="st-i sti-1">1 / 3 &mdash; directed</span><span class="st-i sti-2">2 / 3 &mdash; conditioned</span><span class="st-i sti-3">3 / 3 &mdash; indiscernible</span>
+<span class="h">drift</span>      <span class="st-i sti-0">not measured &mdash; no profile</span><span class="st-i sti-1">not measured &mdash; corpus unconditioned</span><span class="st-i sti-2">0.19 against profile sgbett-2026</span><span class="st-i sti-3">0.06 against profile sgbett-2026</span>
+
+<span class="h">hands</span>
+  human    framework, direction, decisions,
+           final text, publication
+  model    prose, structuring,
+           option generation
+  neither  see notes
+
+<span class="h">models</span>     Claude Opus 4.8 &mdash; direction, 2026-08-15
+           Claude Opus 5 &mdash; copy and build, 2026-08-16
+           Anthropic
+
+<span class="h">review</span>     read in full by the author,
+           line by line, before publication
+<span class="h">data</span>       no personal or proprietary content
+           submitted to the model</p>
+
+    <p class="label">Disclosure</p>
+
+    <p class="statement">I take full responsibility for the framework, the arguments and the conclusions. The prose and structural rendering are the product of collaboration with a model, iteratively directed and reviewed. Attribution follows responsibility, not authorship of individual sentences.</p>
+
+    <p class="label">If you cite this</p>
+
+    <p>The compact only holds if readers accept a parallel responsibility. The template offered, for anyone who reads this the way it was written:</p>
+
+    <p class="statement">I engaged with this work through a combination of direct reading and AI-assisted analysis. My use of its arguments and citations is defensible; I take responsibility for having verified what I rely on.</p>
+
+    <p class="label">Notes</p>
+
+    <ul class="notes">
+      <li>[ The prose does not change between states. Only the setting does. Simulating a voice that does not yet exist would be the exact dishonesty this project refuses, and it would also ruin the experiment. ]</li>
+      <li>[ The axis is anonymous to particular, not plain to polished. If a later state simply looks better, the page is arguing that effort deserves nicer rendering &mdash; the fallacy the other column spends four paragraphs dismantling. Every state is meant to be equally well made. ]</li>
+      <li>[ The wordmark discloses its own construction. <em>Amanuensis</em>, with the tail of <em>animus</em> grafted on. The graft stays in the second tone at every state, including the one where the seam is no longer findable. Disclosure does not lapse because the evidence became invisible. ]</li>
+      <li>[ It also parses as a Latin superlative. <em>-imus</em>, as in <em>optimus</em>. Most scribe-like. Unplanned; kept. ]</li>
+      <li>[ Two tones and no hue is rubrication with the colour removed. Manuscripts marked the second hand in red; this marks it by weight of ink, which survives a photocopier and does not become a costume. ]</li>
+      <li>[ Three load-bearing moves in the direction resist assignment: <em>minimally styled, not unstyled</em>; two-tone by weight of ink; and the rotating divide. Each emerged in the exchange itself. Neither hand can claim them, which is the point. ]</li>
+      <li>[ In production the page renders at the declared level only. The dial is a study device &mdash; though an archive of previous states would sit well with a project that keeps abandoned versions rather than deleting them. ]</li>
+    </ul>
+
+    <p class="label">Amendments</p>
+
+    <ul class="amendments">
+      <li>i &middot; 2026-08-16 &middot; First statement.</li>
+      <li>ii &middot; 2026-08-16 &middot; Voicing declared as a manifest field.</li>
+    </ul>
+
+    <p class="colophon">Set in the system&rsquo;s own serifs and monospace.<br>
+    Two tones of a single ink.<br>
+    Amanuensimus &mdash; Phase 0.</p>
+
+  </div>
+
+</main>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('.dial button');
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){
+      var v = b.getAttribute('data-set');
+      root.setAttribute('data-voicing', v);
+      buttons.forEach(function(o){
+        o.setAttribute('aria-pressed', o === b ? 'true' : 'false');
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

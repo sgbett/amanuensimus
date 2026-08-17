@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amanuensimus — visual identity, first pass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..700;1,6..72,200..700&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --quire:#EBECE7;      /* page ground — cool archival board, not vellum */
+  --ink:#191A1C;        /* the scribe's hand */
+  --gall:#5E625F;       /* secondary, faded iron-gall */
+  --azurite:#2D4A78;    /* structure, and the reader's hand */
+  --minium:#AE1F2A;     /* the rubricator's hand. Rationed. */
+  --rule:#D2D4CE;       /* ruling lines */
+
+  --serif:'Newsreader',Georgia,serif;
+  --grot:'Archivo',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--quire);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-optical-sizing:auto;
+  font-size:1.0625rem;
+  line-height:1.62;
+  font-weight:380;
+}
+
+/* ─── page armature ─────────────────────────────────────── */
+.page{
+  max-width:62rem;
+  margin:0 auto;
+  padding:0 1.5rem 8rem;
+}
+.band{
+  display:grid;
+  grid-template-columns:12rem minmax(0,1fr);
+  column-gap:2.75rem;
+  align-items:start;
+}
+.band + .band{margin-top:5.5rem}
+.band > .body{
+  border-left:1px solid var(--rule);
+  padding-left:2.5rem;
+  max-width:38rem;
+}
+.marg{
+  text-align:right;
+  padding-top:.35rem;
+  position:sticky;
+  top:2rem;
+}
+
+/* ─── margin furniture ──────────────────────────────────── */
+.paraph{
+  display:inline-flex;
+  align-items:baseline;
+  gap:.5rem;
+  font-family:var(--grot);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--gall);
+}
+.paraph .pil{
+  font-family:var(--serif);
+  font-size:1.35rem;
+  line-height:1;
+  color:var(--minium);
+  font-weight:500;
+}
+.note{
+  margin:1.1rem 0 0;
+  font-size:.8125rem;
+  line-height:1.5;
+  color:var(--gall);
+  font-style:italic;
+  font-weight:380;
+}
+.note b{
+  font-style:normal;
+  font-weight:500;
+  color:var(--ink);
+}
+
+/* ─── type ──────────────────────────────────────────────── */
+h2{
+  font-size:clamp(1.5rem,3.4vw,2.05rem);
+  font-weight:300;
+  line-height:1.18;
+  letter-spacing:-.012em;
+  margin:0 0 1.4rem;
+}
+h3{
+  font-family:var(--grot);
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--azurite);
+  margin:2.6rem 0 1rem;
+}
+p{margin:0 0 1.05rem}
+.lede{font-size:1.2rem;line-height:1.5;font-weight:300}
+a{color:var(--azurite)}
+strong{font-weight:600}
+em{font-style:italic}
+.tight{margin-bottom:.4rem}
+
+/* ─── masthead ──────────────────────────────────────────── */
+.masthead{padding:5.5rem 0 4.5rem}
+.eyebrow{
+  font-family:var(--grot);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gall);
+  margin:0 0 2.2rem;
+}
+.hero-word{
+  font-size:clamp(2.9rem,10.5vw,6.6rem);
+  font-weight:250;
+  line-height:.95;
+  letter-spacing:-.028em;
+  margin:0;
+  word-break:break-word;
+}
+.graft{color:var(--minium)}
+.hero-sub{
+  margin:2rem 0 0;
+  max-width:34rem;
+  font-size:1.1rem;
+  line-height:1.55;
+  color:var(--gall);
+  font-weight:380;
+}
+.hero-rule{
+  height:1px;background:var(--rule);
+  margin:3.5rem 0 0;
+}
+
+/* ─── marks ─────────────────────────────────────────────── */
+.mark-ink{fill:none;stroke:var(--ink)}
+.mark-rub{fill:none;stroke:var(--minium)}
+.mark-blue{fill:var(--azurite)}
+.mark-inkf{fill:var(--ink)}
+
+.markgrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));
+  gap:1px;
+  background:var(--rule);
+  border:1px solid var(--rule);
+  margin:1.6rem 0 0;
+}
+.cell{
+  background:var(--quire);
+  padding:1.75rem 1.5rem 1.5rem;
+}
+.cell .stage{
+  height:7.5rem;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.25rem;
+}
+.cell .stage svg{height:100%;width:auto}
+.cell h4{
+  font-family:var(--grot);
+  font-size:.78rem;font-weight:600;letter-spacing:.04em;
+  margin:0 0 .45rem;
+}
+.cell p{
+  font-size:.85rem;line-height:1.5;color:var(--gall);margin:0;
+}
+.tag{
+  display:inline-block;
+  font-family:var(--grot);
+  font-size:.6rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--minium);
+  border:1px solid currentColor;
+  padding:.12rem .4rem;
+  margin-bottom:.7rem;
+}
+.tag.sketch{color:var(--gall)}
+
+/* small-size proof strip */
+.sizes{
+  display:flex;align-items:flex-end;gap:1.6rem;
+  padding:1.4rem 1.5rem;
+  border:1px solid var(--rule);
+  border-top:0;
+  background:var(--quire);
+  flex-wrap:wrap;
+}
+.sizes .s{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.sizes svg{display:block}
+.sizes span{
+  font-family:var(--mono);font-size:.65rem;color:var(--gall);
+}
+
+/* ─── wordmark treatments ───────────────────────────────── */
+.treat{
+  border:1px solid var(--rule);
+  padding:1.6rem 1.5rem;
+  margin-top:1.1rem;
+  background:var(--quire);
+}
+.treat + .treat{border-top:0}
+.treat .label{
+  font-family:var(--grot);
+  font-size:.63rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gall);
+  margin:0 0 1rem;
+}
+.wm{
+  font-size:clamp(1.5rem,5vw,2.5rem);
+  font-weight:250;letter-spacing:-.022em;line-height:1.05;
+  word-break:break-word;
+}
+.wm-seam{position:relative}
+.wm-hair{
+  border-left:1px solid var(--minium);
+  padding-left:.06em;margin-left:.02em;
+}
+.wm-stack{
+  font-size:clamp(1.35rem,4.4vw,2.1rem);
+  font-weight:250;line-height:.98;letter-spacing:-.02em;
+}
+.wm-stack .b{display:block}
+.wm-short{
+  font-size:clamp(1.6rem,5vw,2.6rem);
+  font-weight:300;letter-spacing:-.01em;
+}
+.wm-caps{
+  font-family:var(--grot);
+  font-size:clamp(.85rem,2.6vw,1.15rem);
+  font-weight:500;letter-spacing:.34em;text-transform:uppercase;
+}
+
+/* ─── palette ───────────────────────────────────────────── */
+.swatches{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));
+  gap:1px;background:var(--rule);border:1px solid var(--rule);
+  margin-top:1.4rem;
+}
+.sw{background:var(--quire);padding:0}
+.sw .chip{height:4.5rem}
+.sw .meta{padding:.8rem .9rem 1rem}
+.sw .nm{
+  font-family:var(--grot);font-size:.78rem;font-weight:600;margin:0 0 .12rem;
+}
+.sw .hx{font-family:var(--mono);font-size:.7rem;color:var(--gall);margin:0 0 .5rem}
+.sw .use{font-size:.8rem;line-height:1.45;color:var(--gall);margin:0}
+
+/* ─── specimen / applications ───────────────────────────── */
+.spec{
+  border:1px solid var(--rule);
+  background:var(--quire);
+  padding:1.9rem 1.7rem;
+  margin-top:1.3rem;
+}
+.spec .cap{
+  font-family:var(--grot);
+  font-size:.63rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gall);
+  margin:0 0 1.2rem;
+}
+.roles{
+  display:grid;gap:1.7rem;
+}
+.role-hd{
+  font-family:var(--grot);font-size:.63rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--azurite);
+  margin:0 0 .55rem;
+}
+.samp-serif{font-family:var(--serif);font-size:1.08rem;line-height:1.6;margin:0}
+.samp-grot{font-family:var(--grot);font-size:.9rem;line-height:1.55;margin:0}
+.samp-mono{font-family:var(--mono);font-size:.82rem;line-height:1.6;margin:0}
+
+.discl{
+  border-left:3px solid var(--minium);
+  padding:.15rem 0 .15rem 1.15rem;
+  margin:1.1rem 0;
+}
+.discl .hd{
+  font-family:var(--grot);font-size:.62rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--minium);
+  margin:0 0 .5rem;
+}
+.discl.reader{border-left-color:var(--azurite)}
+.discl.reader .hd{color:var(--azurite)}
+.discl p{font-size:.98rem;line-height:1.55;margin:0}
+
+.code{
+  font-family:var(--mono);font-size:.78rem;line-height:1.75;
+  white-space:pre;overflow-x:auto;
+  margin:0;
+}
+.code .k{color:var(--gall)}
+.code .m{color:var(--minium)}
+.code .a{color:var(--azurite)}
+
+.titlepage{
+  border:1px solid var(--rule);
+  background:var(--quire);
+  padding:3.2rem 2.4rem 2.2rem;
+  margin-top:1.3rem;
+}
+.titlepage .tp-t{
+  font-size:clamp(1.3rem,3.6vw,1.75rem);
+  font-weight:300;line-height:1.22;letter-spacing:-.012em;margin:0 0 .7rem;
+  max-width:26rem;
+}
+.titlepage .tp-a{font-size:.95rem;color:var(--gall);margin:0 0 2.6rem;font-style:italic}
+.titlepage .tp-f{
+  border-top:1px solid var(--rule);padding-top:1rem;
+  font-size:.8rem;line-height:1.5;color:var(--gall);margin:0;
+}
+.titlepage .tp-f .pil{color:var(--minium);font-size:.95rem}
+
+.readme{
+  border:1px solid var(--rule);background:var(--quire);
+  padding:2.4rem 1.7rem;margin-top:1.3rem;text-align:center;
+}
+.readme .rm-w{
+  font-size:1.9rem;font-weight:250;letter-spacing:-.022em;margin:1rem 0 .45rem;
+}
+.readme .rm-s{
+  font-family:var(--grot);font-size:.74rem;letter-spacing:.06em;
+  color:var(--gall);margin:0 0 1.2rem;
+}
+.badges{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap}
+.badge{
+  font-family:var(--mono);font-size:.64rem;
+  border:1px solid var(--rule);padding:.2rem .5rem;color:var(--gall);
+}
+.badge.rub{border-color:var(--minium);color:var(--minium)}
+
+/* ─── choose / decisions ────────────────────────────────── */
+.pick{
+  border:1px solid var(--ink);
+  padding:1.7rem 1.6rem;
+  margin-top:1.4rem;
+}
+.pick .hd{
+  font-family:var(--grot);font-size:.63rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--minium);margin:0 0 .9rem;
+}
+ol.q{margin:1rem 0 0;padding-left:1.15rem}
+ol.q li{margin-bottom:.85rem;padding-left:.3rem}
+ol.q li::marker{color:var(--minium);font-family:var(--grot);font-size:.85rem}
+
+/* ─── rubrication reveal ────────────────────────────────── */
+.rub-anim{opacity:0;transition:opacity .55s ease .3s}
+.ruled .rub-anim{opacity:1}
+.no-js .rub-anim{opacity:1}
+
+@media (prefers-reduced-motion: reduce){
+  .rub-anim{opacity:1;transition:none}
+}
+
+/* ─── responsive ────────────────────────────────────────── */
+@media (max-width:760px){
+  .band{grid-template-columns:1fr;row-gap:1.1rem}
+  .band > .body{border-left:0;padding-left:0;border-top:1px solid var(--rule);padding-top:1.4rem}
+  .marg{text-align:left;position:static;padding-top:0}
+  .note{margin-top:.7rem}
+  .masthead{padding:3.5rem 0 3rem}
+  .band + .band{margin-top:4rem}
+}
+
+:focus-visible{outline:2px solid var(--azurite);outline-offset:3px}
+</style>
+</head>
+<body class="no-js">
+<div class="page">
+
+  <!-- ══════════ MASTHEAD ══════════ -->
+  <header class="masthead">
+    <p class="eyebrow">Visual identity &middot; first pass &middot; 16 August 2026</p>
+    <h1 class="hero-word">amanuensi<span class="graft rub-anim">mus</span></h1>
+    <p class="hero-sub">A framework for AI-collaborative authorship and reading. The identity has one job: make a second hand in the text visible without making it apologetic.</p>
+    <div class="hero-rule"></div>
+  </header>
+
+  <!-- ══════════ I. THE IDEA ══════════ -->
+  <section class="band">
+    <div class="marg">
+      <span class="paraph"><span class="pil rub-anim">&para;</span> i</span>
+      <p class="note">The wordmark above is already doing the work. <b>amanuensi</b> is the scribe; <b>mus</b> is the tail of <i>animus</i>, grafted on. The seam is disclosed rather than smoothed.</p>
+      <p class="note">A second reading worth keeping: <b>-imus</b> is the Latin superlative. <i>Amanuensimus</i> also parses as &ldquo;most scribe-like&rdquo;.</p>
+    </div>
+    <div class="body">
+      <h2>The organising idea: rubrication</h2>
+      <p class="lede">Your hardest identity problem &mdash; how do you make a second contributor visible in a text without diminishing the first? &mdash; already has an eight-hundred-year-old solution.</p>
+      <p>Medieval manuscripts were collaborative artefacts. The scribe wrote the body in iron-gall ink and left gaps. A second person, the <em>rubricator</em>, came afterwards and worked into those gaps in red: paragraph marks, initials, corrections, the apparatus that makes a text navigable. Two hands, one page, structurally necessary, never hidden. Nobody thought the rubricator diminished the scribe.</p>
+      <p>That is disclosure integrity as a <strong>visual grammar</strong> rather than a logo. It gives the palette a reason instead of a preference, and it means the identity can be applied to a README, a paper, a CLI and a provenance manifest without ever repeating a symbol.</p>
+      <p>One discipline makes it work: <strong>red is rationed</strong>. It never appears decoratively. Wherever it appears, it marks the second hand &mdash; the model's contribution, the disclosure, the graft. Blue does the ordinary structural work. If red starts appearing in headings and buttons, the whole system collapses into ornament.</p>
+      <p>This document is set in the system it proposes, so you can judge it in use rather than in the abstract. The paragraph marks in the margin arrive after the text, as they did.</p>
+    </div>
+  </section>
+
+  <!-- ══════════ II. WORDMARK ══════════ -->
+  <section class="band">
+    <div class="marg">
+      <span class="paraph"><span class="pil rub-anim">&para;</span> ii</span>
+      <p class="note">Twelve letters, five of them narrow. The word will never be a compact logo &mdash; so treat length as a feature and set it wide and light.</p>
+      <p class="note">Weight 250&ndash;300 only. At 400+ the word looks like a law firm.</p>
+    </div>
+    <div class="body">
+      <h2>The wordmark</h2>
+      <p>Long words are usually a problem. Here the length is the asset: set light and wide, <em>amanuensimus</em> reads as a piece of scholarship rather than a startup. Four treatments, in order of how much they say.</p>
+
+      <div class="treat">
+        <p class="label">Primary &mdash; graft disclosed</p>
+        <div class="wm">amanuensi<span class="graft">mus</span></div>
+      </div>
+
+      <div class="treat">
+        <p class="label">Quiet &mdash; hairline seam</p>
+        <div class="wm wm-seam">amanuensi<span class="wm-hair">mus</span></div>
+      </div>
+
+      <div class="treat">
+        <p class="label">Stacked &mdash; for narrow measures and title pages</p>
+        <div class="wm-stack">
+          <span class="b">amanuensi</span>
+          <span class="b graft">mus</span>
+        </div>
+      </div>
+
+      <div class="treat">
+        <p class="label">Short forms &mdash; CLI, package name, tight spaces</p>
+        <div class="wm-short">am<span class="graft">.</span></div>
+        <div style="height:1rem"></div>
+        <div class="wm-caps">amanuensimus</div>
+      </div>
+
+      <p style="margin-top:1.6rem">The full-colour graft is for the canonical lockup. In running text, the hairline seam is enough &mdash; and in a single-colour context the seam disappears entirely without damage, because the word still reads.</p>
+    </div>
+  </section>
+
+  <!-- ══════════ III. MARKS ══════════ -->
+  <section class="band">
+    <div class="marg">
+      <span class="paraph"><span class="pil rub-anim">&para;</span> iii</span>
+      <p class="note">Two developed, two sketched, as agreed. My recommendation is at &para;&nbsp;viii.</p>
+      <p class="note">The manicule is drawn in <b>blue</b>, not red &mdash; the reader's hand is a third party, and the pillar deserves its own colour.</p>
+    </div>
+    <div class="body">
+      <h2>Four marks</h2>
+      <p>Each is drawn from an actual convention for marking a second hand in a text. None is an abstract glyph looking for a meaning.</p>
+
+      <div class="markgrid">
+
+        <!-- A -->
+        <div class="cell">
+          <span class="tag">Developed</span>
+          <div class="stage">
+            <svg viewBox="0 0 104 140" role="img" aria-label="The paraph: a pilcrow with one stem in ink and the bowl and outer stem in red">
+              <path class="mark-rub" stroke-width="12" d="M54 12 H36 A26 26 0 0 0 36 64 H54"/>
+              <line class="mark-ink" stroke-width="12" x1="54" y1="6" x2="54" y2="134"/>
+              <line class="mark-rub" stroke-width="12" x1="84" y1="6" x2="84" y2="134"/>
+            </svg>
+          </div>
+          <h4>A &mdash; The Paraph</h4>
+          <p>A pilcrow split between hands: one stem in ink, the bowl and second stem in red. The scribe's line, and the rubricator's mark wrapped around it. Reads at 16&nbsp;px.</p>
+        </div>
+
+        <!-- B -->
+        <div class="cell">
+          <span class="tag">Developed</span>
+          <div class="stage">
+            <svg viewBox="0 0 120 140" role="img" aria-label="Interpolation brackets: a black opening bracket and a red closing bracket, slightly off register">
+              <path class="mark-ink" stroke-width="11" stroke-linejoin="miter" d="M52 22 H30 V104 H52"/>
+              <path class="mark-rub" stroke-width="11" stroke-linejoin="miter" d="M72 28 H94 V110 H72"/>
+            </svg>
+          </div>
+          <h4>B &mdash; Interpolation</h4>
+          <p>Editorial brackets, opened by one hand and closed by another, deliberately off register. Scholars already read <span style="font-family:var(--mono);font-size:.8em">[&nbsp;]</span> as &ldquo;inserted, and marked as such&rdquo;. Most restrained; most defensible.</p>
+        </div>
+
+        <!-- C -->
+        <div class="cell">
+          <span class="tag sketch">Sketch</span>
+          <div class="stage">
+            <svg viewBox="0 0 140 120" role="img" aria-label="A manicule: a stylised pointing hand, drawn in blue">
+              <g class="mark-blue">
+                <rect x="6" y="46" width="26" height="34" rx="5"/>
+                <rect x="30" y="40" width="34" height="46" rx="13"/>
+                <rect x="58" y="54" width="60" height="15" rx="7.5"/>
+                <rect x="42" y="26" width="15" height="22" rx="7.5"/>
+                <rect x="58" y="72" width="20" height="11" rx="5.5"/>
+              </g>
+              <circle cx="126" cy="61" r="5" fill="var(--minium)"/>
+            </svg>
+          </div>
+          <h4>C &mdash; Manicule</h4>
+          <p>The pointing hand readers drew in the margins of books they did not write. Aims at the reader-side pillar. Warmer, more idiosyncratic, and harder to keep serious at small sizes.</p>
+        </div>
+
+        <!-- D -->
+        <div class="cell">
+          <span class="tag sketch">Sketch</span>
+          <div class="stage">
+            <div style="text-align:center;line-height:1;font-weight:250">
+              <div style="font-size:2.35rem;letter-spacing:-.02em">a<span style="color:var(--minium)">m</span></div>
+              <div style="font-family:var(--mono);font-size:.6rem;color:var(--gall);letter-spacing:.1em;margin-top:.7rem">SHARED&nbsp;STEM</div>
+            </div>
+          </div>
+          <h4>D &mdash; The Graft</h4>
+          <p>Not really a mark &mdash; a wordmark behaviour. The seam where <i>animus</i> enters <i>amanuensis</i>, drawn or tinted. Strongest as the primary wordmark (&para;&nbsp;ii); weakest as a standalone symbol.</p>
+        </div>
+
+      </div>
+
+      <!-- small-size proof -->
+      <div class="sizes">
+        <div class="s">
+          <svg width="16" height="21" viewBox="0 0 104 140" aria-hidden="true">
+            <path class="mark-rub" stroke-width="14" d="M54 12 H36 A26 26 0 0 0 36 64 H54"/>
+            <line class="mark-ink" stroke-width="14" x1="54" y1="6" x2="54" y2="134"/>
+            <line class="mark-rub" stroke-width="14" x1="84" y1="6" x2="84" y2="134"/>
+          </svg><span>A / 16</span>
+        </div>
+        <div class="s">
+          <svg width="24" height="32" viewBox="0 0 104 140" aria-hidden="true">
+            <path class="mark-rub" stroke-width="13" d="M54 12 H36 A26 26 0 0 0 36 64 H54"/>
+            <line class="mark-ink" stroke-width="13" x1="54" y1="6" x2="54" y2="134"/>
+            <line class="mark-rub" stroke-width="13" x1="84" y1="6" x2="84" y2="134"/>
+          </svg><span>A / 24</span>
+        </div>
+        <div class="s">
+          <svg width="40" height="54" viewBox="0 0 104 140" aria-hidden="true">
+            <path class="mark-rub" stroke-width="12" d="M54 12 H36 A26 26 0 0 0 36 64 H54"/>
+            <line class="mark-ink" stroke-width="12" x1="54" y1="6" x2="54" y2="134"/>
+            <line class="mark-rub" stroke-width="12" x1="84" y1="6" x2="84" y2="134"/>
+          </svg><span>A / 40</span>
+        </div>
+        <div class="s">
+          <svg width="16" height="19" viewBox="0 0 120 140" aria-hidden="true">
+            <path class="mark-ink" stroke-width="14" d="M52 22 H30 V104 H52"/>
+            <path class="mark-rub" stroke-width="14" d="M72 28 H94 V110 H72"/>
+          </svg><span>B / 16</span>
+        </div>
+        <div class="s">
+          <svg width="24" height="28" viewBox="0 0 120 140" aria-hidden="true">
+            <path class="mark-ink" stroke-width="12" d="M52 22 H30 V104 H52"/>
+            <path class="mark-rub" stroke-width="12" d="M72 28 H94 V110 H72"/>
+          </svg><span>B / 24</span>
+        </div>
+        <div class="s">
+          <svg width="40" height="47" viewBox="0 0 120 140" aria-hidden="true">
+            <path class="mark-ink" stroke-width="11" d="M52 22 H30 V104 H52"/>
+            <path class="mark-rub" stroke-width="11" d="M72 28 H94 V110 H72"/>
+          </svg><span>B / 40</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ IV. PALETTE ══════════ -->
+  <section class="band">
+    <div class="marg">
+      <span class="paraph"><span class="pil rub-anim">&para;</span> iv</span>
+      <p class="note">Deliberately <b>cool</b>. A warm cream ground would make this a manuscript pastiche. It is a contemporary enquiry using a manuscript convention &mdash; so the page is cool and the only warmth on it is the second hand.</p>
+    </div>
+    <div class="body">
+      <h2>Palette</h2>
+      <p>Six values. Two of them carry meaning and must never be spent on decoration.</p>
+
+      <div class="swatches">
+        <div class="sw">
+          <div class="chip" style="background:#EBECE7"></div>
+          <div class="meta">
+            <p class="nm">Quire</p><p class="hx">#EBECE7</p>
+            <p class="use">Page ground. Cool archival board, not vellum.</p>
+          </div>
+        </div>
+        <div class="sw">
+          <div class="chip" style="background:#191A1C"></div>
+          <div class="meta">
+            <p class="nm">Ink</p><p class="hx">#191A1C</p>
+            <p class="use">The author's hand. All primary text.</p>
+          </div>
+        </div>
+        <div class="sw">
+          <div class="chip" style="background:#5E625F"></div>
+          <div class="meta">
+            <p class="nm">Gall</p><p class="hx">#5E625F</p>
+            <p class="use">Secondary text, captions, marginalia.</p>
+          </div>
+        </div>
+        <div class="sw">
+          <div class="chip" style="background:#2D4A78"></div>
+          <div class="meta">
+            <p class="nm">Azurite</p><p class="hx">#2D4A78</p>
+            <p class="use"><strong>Semantic.</strong> Structure, links, and the reader's hand.</p>
+          </div>
+        </div>
+        <div class="sw">
+          <div class="chip" style="background:#AE1F2A"></div>
+          <div class="meta">
+            <p class="nm">Minium</p><p class="hx">#AE1F2A</p>
+            <p class="use"><strong>Semantic. Rationed.</strong> The model's contribution, and disclosure of it.</p>
+          </div>
+        </div>
+        <div class="sw">
+          <div class="chip" style="background:#D2D4CE"></div>
+          <div class="meta">
+            <p class="nm">Rule</p><p class="hx">#D2D4CE</p>
+            <p class="use">Ruling lines and borders. Hairline only.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>The rule that keeps it honest</h3>
+      <p>Minium marks the second hand. Azurite marks the third. If a red element on a page does not correspond to a machine contribution or its disclosure, it should be blue, grey or black instead. That single constraint is what stops the identity becoming a look.</p>
+    </div>
+  </section>
+
+  <!-- ══════════ V. TYPOGRAPHY ══════════ -->
+  <section class="band">
+    <div class="marg">
+      <span class="paraph"><span class="pil rub-anim">&para;</span> v</span>
+      <p class="note">Three faces, mapped onto the trust-asymmetry table in VISION.md. The typography states the epistemics before the prose does.</p>
+      <p class="note">Newsreader is chosen over Garamond deliberately &mdash; it is a screen-first serif with real optical sizes, and Garamond has become the default costume for anything literary.</p>
+    </div>
+    <div class="body">
+      <h2>Typography</h2>
+      <p>Your VISION document already sorts contributions into three trust classes. That is a typographic system waiting to be written down.</p>
+
+      <div class="spec">
+        <p class="cap">Three roles, three faces</p>
+        <div class="roles">
+          <div>
+            <p class="role-hd">Author's own writing &mdash; Newsreader, 250&ndash;400</p>
+            <p class="samp-serif">Attribution follows responsibility, not authorship of individual sentences. If you can defend it under scrutiny you did not rehearse for, the causal chain is philosophically uninteresting.</p>
+          </div>
+          <div>
+            <p class="role-hd">Evidence and apparatus &mdash; Archivo, 400&ndash;600</p>
+            <p class="samp-grot">Clark, A. and Chalmers, D. (1998) &lsquo;The Extended Mind&rsquo;, <em>Analysis</em>, 58(1), pp. 7&ndash;19.</p>
+          </div>
+          <div>
+            <p class="role-hd">Machine record &mdash; IBM Plex Mono, 400&ndash;500</p>
+            <p class="samp-mono">model: claude-opus-4-6 &middot; session: 3f2a91 &middot; drift: 0.08 &middot; manifest: signed</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="spec">
+        <p class="cap">Scale in use</p>
+        <div style="font-size:clamp(1.5rem,3.4vw,2.05rem);font-weight:300;line-height:1.18;letter-spacing:-.012em;margin-bottom:.9rem">Reading in the age of collaborative authorship</div>
+        <p class="samp-serif" style="color:var(--gall);margin-bottom:1.1rem">The compact only holds if readers accept parallel responsibility.</p>
+        <p class="samp-serif">Without reader-side tooling, the authorship norms are stranded. Everyone who accepts responsibility-based authorship will remain marginal for as long as reading practice has not caught up &mdash; which makes the reading paper, arguably, the most important of the three.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ VI. THE DISCLOSURE BLOCK ══════════ -->
+  <section class="band">
+    <div class="marg">
+      <span class="paraph"><span class="pil rub-anim">&para;</span> vi</span>
+      <p class="note">If the identity fails anywhere, it fails here. Every other application is optional; this one ships with every artefact the framework produces.</p>
+    </div>
+    <div class="body">
+      <h2>The disclosure block</h2>
+      <p>This is the real test. The framework generates a disclosure with every artefact, and that block will be seen more often than any logo. It needs to look considered rather than confessional &mdash; a piece of apparatus, like a citation, not a warning label.</p>
+
+      <div class="spec">
+        <p class="cap">Author-side &mdash; rendered</p>
+        <div class="discl">
+          <p class="hd">&para; Collaboration</p>
+          <p>I take full responsibility for the framework, the arguments, and the conclusions. The prose and structural rendering are the product of collaboration with a model, iteratively directed and reviewed. Attribution follows responsibility, not authorship of individual sentences.</p>
+        </div>
+      </div>
+
+      <div class="spec">
+        <p class="cap">Reader-side &mdash; rendered</p>
+        <div class="discl reader">
+          <p class="hd">&#9758; Engagement</p>
+          <p>I engaged with this work through a combination of direct reading and AI-assisted analysis. My use of its arguments and citations is defensible; I take responsibility for having verified what I rely on.</p>
+        </div>
+      </div>
+
+      <div class="spec">
+        <p class="cap">Machine-readable manifest &mdash; red marks the second hand</p>
+        <p class="code"><span class="k">artefact:</span>  review-final.md
+<span class="k">author:</span>    Simon Bettison
+<span class="k">hands:</span>
+  <span class="k">-</span> role: framework, evidence, conclusions
+    by: <span class="a">human</span>
+  <span class="k">-</span> role: prose, structural rendering
+    by: <span class="m">claude-opus-4-6</span>   <span class="k"># minium</span>
+    <span class="k">engagement:</span> <span class="m">argued, iterated, reshaped</span>
+<span class="k">reviews:</span>
+  <span class="k">-</span> adversarial   session: <span class="m">fresh</span>
+  <span class="k">-</span> balance       session: <span class="m">fresh</span>
+  <span class="k">-</span> domain        session: <span class="m">fresh</span>
+<span class="k">disclosure:</span> rendered &middot; venue=academic-longform</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ VII. APPLICATIONS ══════════ -->
+  <section class="band">
+    <div class="marg">
+      <span class="paraph"><span class="pil rub-anim">&para;</span> vii</span>
+      <p class="note">Mark A shown throughout. Swap mentally for B if you prefer the quieter route &mdash; every application holds either way, which is a decent test of the system.</p>
+    </div>
+    <div class="body">
+      <h2>Applications</h2>
+
+      <div class="readme">
+        <svg width="30" height="40" viewBox="0 0 104 140" aria-hidden="true" style="display:inline-block">
+          <path class="mark-rub" stroke-width="12" d="M54 12 H36 A26 26 0 0 0 36 64 H54"/>
+          <line class="mark-ink" stroke-width="12" x1="54" y1="6" x2="54" y2="134"/>
+          <line class="mark-rub" stroke-width="12" x1="84" y1="6" x2="84" y2="134"/>
+        </svg>
+        <div class="rm-w">amanuensi<span class="graft">mus</span></div>
+        <p class="rm-s">Honest collaboration between human authors and AI models, made tractable.</p>
+        <div class="badges">
+          <span class="badge">python 3.12</span>
+          <span class="badge">MCP</span>
+          <span class="badge rub">provenance: required</span>
+          <span class="badge">British English</span>
+        </div>
+      </div>
+
+      <div class="titlepage">
+        <p style="font-family:var(--grot);font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gall);margin:0 0 2.4rem">amanuensi<span class="graft">mus</span> &nbsp;/&nbsp; paper two of three</p>
+        <p class="tp-t">Bias in AI synthesis: what an abandoned literature review reveals about thesis-first method</p>
+        <p class="tp-a">Simon Bettison</p>
+        <p class="tp-f"><span class="pil">&para;</span> Prose and structural rendering produced in collaboration with a model, iteratively directed and reviewed. Full provenance manifest at <span style="font-family:var(--mono);font-size:.95em">amanuensimus.com/p/2</span>.</p>
+      </div>
+
+      <div class="spec">
+        <p class="cap">CLI</p>
+        <p class="code"><span class="m">&para;</span> amanuensimus 0.1.0
+
+  <span class="k">voice</span>     profile sgbett-2026 &middot; corpus 412 docs &middot; drift <span class="a">0.08</span>
+  <span class="k">bias</span>      evidence-first &middot; 3 fresh sessions queued
+  <span class="k">reading</span>   probe ready
+
+  <span class="m">&para;</span> provenance recording &mdash; artefacts will carry a manifest</p>
+      </div>
+
+      <div class="spec">
+        <p class="cap">Favicon and avatar &mdash; ink on quire, red survives to 16&nbsp;px</p>
+        <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap">
+          <div style="width:64px;height:64px;border:1px solid var(--rule);display:flex;align-items:center;justify-content:center">
+            <svg width="26" height="35" viewBox="0 0 104 140" aria-hidden="true">
+              <path class="mark-rub" stroke-width="13" d="M54 12 H36 A26 26 0 0 0 36 64 H54"/>
+              <line class="mark-ink" stroke-width="13" x1="54" y1="6" x2="54" y2="134"/>
+              <line class="mark-rub" stroke-width="13" x1="84" y1="6" x2="84" y2="134"/>
+            </svg>
+          </div>
+          <div style="width:32px;height:32px;border:1px solid var(--rule);display:flex;align-items:center;justify-content:center">
+            <svg width="14" height="19" viewBox="0 0 104 140" aria-hidden="true">
+              <path class="mark-rub" stroke-width="15" d="M54 12 H36 A26 26 0 0 0 36 64 H54"/>
+              <line class="mark-ink" stroke-width="15" x1="54" y1="6" x2="54" y2="134"/>
+              <line class="mark-rub" stroke-width="15" x1="84" y1="6" x2="84" y2="134"/>
+            </svg>
+          </div>
+          <div style="width:64px;height:64px;background:var(--ink);display:flex;align-items:center;justify-content:center">
+            <svg width="26" height="35" viewBox="0 0 104 140" aria-hidden="true">
+              <path stroke="#AE1F2A" fill="none" stroke-width="13" d="M54 12 H36 A26 26 0 0 0 36 64 H54"/>
+              <line stroke="#EBECE7" stroke-width="13" x1="54" y1="6" x2="54" y2="134"/>
+              <line stroke="#AE1F2A" stroke-width="13" x1="84" y1="6" x2="84" y2="134"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ VIII. RECOMMENDATION ══════════ -->
+  <section class="band">
+    <div class="marg">
+      <span class="paraph"><span class="pil rub-anim">&para;</span> viii</span>
+      <p class="note">Standing invitation, per ETHICS.md: this is meant to be argued with rather than approved.</p>
+    </div>
+    <div class="body">
+      <h2>What I would choose</h2>
+
+      <div class="pick">
+        <p class="hd">Recommendation</p>
+        <p><strong>Wordmark with the graft disclosed, as primary. Mark A (the paraph) as the symbol. Mark B held in reserve.</strong></p>
+        <p style="margin-bottom:0">The wordmark does more conceptual work than any symbol can, and a project this literary can afford to lead with type. The paraph earns its place because it is the one glyph whose entire historical purpose was marking a second hand &mdash; and because it survives to 16&nbsp;px, which brackets only just do. Mark B is the better choice if you ever need the identity to read as neutral scholarly apparatus rather than as an argument; keep it drawn.</p>
+      </div>
+
+      <p style="margin-top:1.7rem">Drop the manicule as a mark. Keep it as a glyph in the reader-side apparatus, where it is charming rather than load-bearing.</p>
+
+      <h3>Open decisions</h3>
+      <ol class="q">
+        <li><strong>Does the red hold up in monochrome?</strong> Papers get printed and photocopied. The seam becomes invisible and the paraph becomes ambiguous. Worth drawing a mono-safe variant before anything is locked &mdash; probably a weight difference rather than a tint.</li>
+        <li><strong>How literal do you want the manuscript reference?</strong> Right now it is a structural borrowing, not a costume: cool ground, contemporary faces, one historical convention. Pushing further towards vellum and Garamond would be warmer and much more generic.</li>
+        <li><strong>Should azurite exist yet?</strong> Reader-side is Phase 4. There is a case for shipping ink, quire and minium only, and introducing blue when the reader tooling actually exists &mdash; so the palette grows as the framework does.</li>
+        <li><strong>Where does the wordmark stop being a wordmark?</strong> If <span style="font-family:var(--mono);font-size:.85em">am.</span> becomes the package name and the CLI, the graft never appears in daily use. Decide whether the short form keeps the red dot or drops the device entirely.</li>
+      </ol>
+
+      <p style="margin-top:2rem;color:var(--gall);font-size:.9rem">Next steps if you want them: mono-safe variants, a Mark B lockup family, or a live single-page site for amanuensimus.com built on this system.</p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+document.body.classList.remove('no-js');
+(function(){
+  var bands = document.querySelectorAll('.band, .masthead');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) {
+    bands.forEach(function(b){ b.classList.add('ruled'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('ruled'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 });
+  bands.forEach(function(b){ io.observe(b); });
+})();
+</script>
+</body>
+</html>

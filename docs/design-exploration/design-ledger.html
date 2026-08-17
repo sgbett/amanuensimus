@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amanuensimus — design ledger</title>
+<meta name="description" content="The visual system as an amendment register. One token at a time, triggered rather than scheduled.">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   AMANUENSIMUS — DESIGN LEDGER
+
+   The design is not versioned. It is amended.
+
+   Every declaration below that can move is a custom property.
+   The ledger (see the script) is the single source of truth:
+   the page renders itself from it, and the register in the
+   right-hand column is printed from the same array.
+
+   Three properties never move. They are marked LOCKED.
+   ═══════════════════════════════════════════════════════════ */
+
+:root{
+  --paper:#FAFAFA;
+  --ink:#141414;                 /* LOCKED — the human hand */
+  --graphite:#737373;            /* the second hand */
+  --slate:#737373;               /* unallocated until vii */
+
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,
+         "Liberation Mono","DejaVu Sans Mono",monospace;
+  --georgia:Georgia,"Times New Roman",Times,serif;
+
+  --gutter:3.25rem;
+
+  /* ── amendable tokens · values as issued, 2026-08-16 ── */
+  --work-face:var(--georgia);
+  --work-size:1.0625rem;
+  --work-lh:1.72;
+  --work-gap:1.15rem;
+  --work-indent:0;
+  --work-align:left;
+  --work-hyphens:manual;
+  --work-measure:34rem;
+
+  --head-style:italic;
+  --head-transform:none;
+  --head-track:.005em;
+  --head-size:1.0625rem;
+
+  --app-face:var(--georgia);
+  --app-size:1.0625rem;
+  --app-lh:1.72;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--work-face);
+  font-size:var(--work-size);
+  line-height:var(--work-lh);
+  -webkit-font-smoothing:antialiased;
+}
+
+.spread{
+  max-width:78rem;
+  margin:0 auto;
+  padding:5.5rem 2.5rem 9rem;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr);
+  column-gap:var(--gutter);
+  align-items:start;
+}
+
+/* LOCKED — the rule */
+.rule{background:#141414;align-self:stretch;width:1px}
+
+.verso,.recto{min-width:0}
+.verso{max-width:var(--work-measure)}
+.recto{max-width:34rem}
+
+.head{min-height:4rem;display:flex;align-items:flex-end;margin:0 0 3.25rem}
+
+.wordmark{
+  font-family:var(--work-face);
+  font-size:clamp(1.7rem,4.4vw,2.4rem);
+  line-height:1;letter-spacing:-.015em;margin:0;font-weight:400;
+}
+.wordmark .graft{color:#737373}      /* LOCKED — the graft */
+.wordmark .sub{
+  display:block;
+  font-family:var(--mono);
+  font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--graphite);margin-top:.9rem;
+}
+
+.behind{
+  font-family:var(--mono);
+  font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--graphite);margin:0;line-height:1.4;
+}
+
+/* ─── the work ──────────────────────────────────────────── */
+
+.verso{
+  font-family:var(--work-face);
+  font-size:var(--work-size);
+  line-height:var(--work-lh);
+  hyphens:var(--work-hyphens);
+  -webkit-hyphens:var(--work-hyphens);
+}
+.verso p{
+  margin:0 0 var(--work-gap);
+  text-align:var(--work-align);
+  text-indent:var(--work-indent);
+}
+.verso p.flush{text-indent:0}
+.verso p:last-child{margin-bottom:0}
+
+.verso h2{
+  font-family:var(--work-face);
+  font-size:var(--head-size);
+  font-style:var(--head-style);
+  text-transform:var(--head-transform);
+  letter-spacing:var(--head-track);
+  font-weight:400;line-height:1.4;
+  margin:3.5rem 0 1.15rem;text-indent:0;text-align:left;
+}
+.verso > h2:first-of-type{margin-top:0}
+
+.lead{
+  font-size:1.28rem !important;line-height:1.45;
+  margin-bottom:2.6rem !important;text-indent:0 !important;
+  text-align:left !important;
+}
+
+.verso ul{list-style:none;margin:0 0 var(--work-gap);padding:0}
+.verso ul li{margin:0 0 .7rem;text-align:left;text-indent:0}
+.verso ul li:last-child{margin-bottom:0}
+.verso ul .t{font-style:italic}
+
+em{font-style:italic}
+strong{font-weight:700}
+
+/* ─── the record ────────────────────────────────────────── */
+
+.recto{
+  font-family:var(--app-face);
+  font-size:var(--app-size);
+  line-height:var(--app-lh);
+}
+.recto p{margin:0 0 1.15rem}
+
+.label{
+  font-family:var(--mono);
+  font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--graphite);margin:3.5rem 0 1.15rem !important;
+}
+.recto > .label:first-of-type{margin-top:0 !important}
+
+/* ─── the dial ──────────────────────────────────────────── */
+
+.dial{margin:0 0 1.6rem}
+.dial input[type=range]{
+  width:100%;margin:.9rem 0 .5rem;accent-color:#141414;
+}
+.dial .readout{
+  font-family:var(--mono);font-size:.75rem;color:var(--graphite);
+  display:flex;justify-content:space-between;gap:1rem;
+}
+.dial .readout b{color:var(--ink);font-weight:400}
+
+/* ─── the register ──────────────────────────────────────── */
+
+.register{list-style:none;margin:0;padding:0}
+.register li{
+  font-family:var(--mono);
+  font-size:.78rem;line-height:1.7;
+  color:#B4B4B4;
+  padding:0 0 1.15rem;
+  transition:color .18s ease;
+}
+.register li:last-child{padding-bottom:0}
+.register li.on{color:var(--graphite)}
+.register li.on .n,.register li.on .t{color:var(--ink)}
+.register .n{letter-spacing:.1em}
+.register .t{}
+.register .d{display:block}
+.register .why{display:block;font-style:normal}
+.register .con{display:block}
+.register .sym{display:block}
+.register .flag{
+  display:inline-block;border:1px solid currentColor;
+  padding:0 .3rem;font-size:.68rem;letter-spacing:.1em;
+  text-transform:uppercase;margin-left:.4rem;
+}
+
+.tokens{
+  font-family:var(--mono);
+  font-size:.75rem;line-height:1.85;
+  color:var(--graphite);
+  white-space:pre-wrap;margin:0;
+  overflow-wrap:break-word;
+}
+.tokens .k{color:var(--ink)}
+.tokens .chg{color:var(--ink);text-decoration:underline;
+  text-decoration-thickness:1px;text-underline-offset:.2em}
+.tokens .lk{color:#B4B4B4}
+
+/* ─── the archive strip ─────────────────────────────────── */
+
+.strip{margin:0}
+.stub{
+  padding:0 0 1.6rem;
+  font-family:var(--work-face);
+  font-size:var(--work-size);
+  line-height:var(--work-lh);
+}
+.stub:last-child{padding-bottom:0}
+.stub .when{
+  font-family:var(--mono);font-size:.6875rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--graphite);
+  display:block;margin-bottom:.5rem;
+}
+.stub p{
+  margin:0;
+  text-indent:var(--work-indent);
+  text-align:var(--work-align);
+  font-family:var(--work-face);
+  font-size:var(--work-size);
+  line-height:var(--work-lh);
+  font-style:var(--stub-style,normal);
+}
+
+.notes{list-style:none;margin:0;padding:0}
+.notes li{
+  font-family:var(--mono);font-size:.78rem;line-height:1.75;
+  color:var(--graphite);margin-bottom:1.15rem;
+}
+.notes li:last-child{margin-bottom:0}
+
+.colophon{
+  font-family:var(--mono);font-size:.6875rem !important;
+  line-height:1.8;color:var(--graphite);margin:3.5rem 0 0 !important;
+}
+
+/* ─── the divide rotates ────────────────────────────────── */
+
+@media (max-width:60rem){
+  .spread{grid-template-columns:minmax(0,1fr);padding:3.5rem 1.5rem 6rem}
+  .verso,.recto{max-width:none}
+  .rule{width:auto;height:1px;margin:4.5rem 0}
+  .head{min-height:0;margin-bottom:2.25rem}
+}
+
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+@media print{.dial{display:none}body{background:#fff}}
+</style>
+</head>
+<body>
+
+<main class="spread">
+
+  <!-- ══════════════ THE WORK ══════════════ -->
+  <div class="verso">
+
+    <div class="head">
+      <h1 class="wordmark">amanuensi<span class="graft">mus</span>
+        <span class="sub">Design ledger</span>
+      </h1>
+    </div>
+
+    <p class="lead flush">The design is not versioned. It is amended &mdash; one token at a time, by the same mechanism the argument uses.</p>
+
+    <h2>Why not a scale</h2>
+
+    <p class="flush">A scale of design states forces coordinated jumps. Each rung has to land whole, every token moving together, and the work of judging it is the work of judging an entire redesign. That is expensive, brittle, and not how anything gets built.</p>
+
+    <p>Worse, it invites a schedule. A schedule commits you to changing things before the reason to change them has arrived, which is how a design acquires decisions nobody can account for.</p>
+
+    <h2>Amendment, not version</h2>
+
+    <p class="flush">The project already has a mechanism for changing a position without erasing where it came from. The design enrols in it.</p>
+
+    <p>An amendment moves <em>one</em> token. It carries a date, a stated reason, and a trigger. It is recorded rather than applied silently, and prior values are kept rather than overwritten.</p>
+
+    <p>The question <em>does the intermediate state hold up?</em> then answers itself. Every state is a single delta from a state that already held. There is nothing to synchronise, because there is never more than one thing in motion.</p>
+
+    <h2>What makes an amendment</h2>
+
+    <ul>
+      <li><span class="t">One token.</span> If it needs two unrelated tokens, it is two amendments.</li>
+      <li><span class="t">A trigger, not a date.</span> The condition under which the change becomes warranted.</li>
+      <li><span class="t">A reason.</span> Stated in terms of the work, not of taste.</li>
+      <li><span class="t">Declared sympathies.</span> The tokens that will need re-checking once this one moves.</li>
+    </ul>
+
+    <h2>Sympathies, and deferring them</h2>
+
+    <p class="flush">Some tokens cannot honestly move alone. Change the face and the measure needs a look, because a different face sets a different number of characters to the em.</p>
+
+    <p>The answer is not to bundle them. It is to <em>declare</em> the coupling and let the sympathy be applied later, on its own evidence. Change the face; read it for a fortnight; then shorten the measure because you have now seen it fail, not because a rule said you would.</p>
+
+    <p>A deferred sympathy is an open amendment. It sits in the register unapplied, which is a more honest state than a change made on prediction.</p>
+
+    <h2>What cannot move</h2>
+
+    <p class="flush">Three properties are locked, and are load-bearing rather than merely settled: two columns; the rule at one pixel of full ink; the graft in the second tone.</p>
+
+    <p>Two more are held but amendable by a constitutional amendment &mdash; no hue, and no more than two tones. Breaking one of those requires a stated reason and a recorded objection, so that the break is legible later as a decision rather than a drift.</p>
+
+    <h2>Whether the record keeps its setting</h2>
+
+    <p class="flush">If the whole site re-renders at current tokens, it stays coherent and the record of its own evolution is destroyed &mdash; which contradicts the position on abandoned versions directly.</p>
+
+    <p>If every artefact freezes at the tokens it was issued under, the record survives and the site becomes a patchwork of hands, which is either the point or a mess.</p>
+
+    <p>The split that holds: the living statement renders at current tokens, because it is living. Dated artefacts freeze at issue. The top of the site is always now; the archive is stratified, and reading down it is reading the evolution.</p>
+
+    <p>This costs almost nothing to implement. Tokens are custom properties, so freezing an artefact is one scoped declaration on its wrapper. Anti-erasure comes free, which is a good sign that the mechanism is the right shape.</p>
+
+  </div>
+
+  <!-- ══════════════ THE RULE ══════════════ -->
+  <div class="rule" role="presentation"></div>
+
+  <!-- ══════════ THE WORK BEHIND THE WORK ══════════ -->
+  <div class="recto">
+
+    <div class="head">
+      <p class="behind">The register, in force</p>
+    </div>
+
+    <p class="label">Amendments applied</p>
+
+    <div class="dial">
+      <label for="dial" class="behind" style="text-transform:none;letter-spacing:.04em">Drag to apply the register in order. This page renders from it.</label>
+      <input id="dial" type="range" min="1" max="7" value="1" step="1" aria-describedby="readout">
+      <p class="readout" id="readout"><span>in force &mdash; <b id="cur">i</b></span><span id="count">1 of 7</span></p>
+    </div>
+
+    <p class="label">Token set</p>
+    <pre class="tokens" id="tokens"></pre>
+
+    <p class="label">Register</p>
+    <ol class="register" id="register"></ol>
+
+    <p class="label">Archive, stratified</p>
+
+    <div class="strip">
+      <div class="stub" style="--work-face:Georgia,serif;--work-size:1.0625rem;--work-lh:1.72;--work-indent:0;--work-align:left">
+        <span class="when">i &middot; 2026-08-16 &middot; frozen at issue</span>
+        <p>Entries keep the setting they were issued in. This one is set in the screen&rsquo;s default serif, because that is what was in force when it was written.</p>
+      </div>
+      <div class="stub" style="--work-face:Charter,'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;--work-size:1.13rem;--work-lh:1.68;--work-indent:0;--work-align:left">
+        <span class="when">iv &middot; unscheduled &middot; frozen at issue</span>
+        <p>A later entry, issued after the face amendment. It does not retro-fit; it simply arrived under different tokens, and keeps them.</p>
+      </div>
+      <div class="stub" style="--work-face:'Iowan Old Style','Palatino Linotype',Palatino,Charter,Georgia,serif;--work-size:1.16rem;--work-lh:1.62;--work-indent:1.35em;--work-align:justify">
+        <span class="when">vi &middot; unscheduled &middot; frozen at issue</span>
+        <p>Later still, under book setting. Read downwards, the archive is a record of the hands that made it &mdash; which is the argument the site is making, arrived at by maintenance rather than by design.</p>
+      </div>
+    </div>
+
+    <p class="label">Notes</p>
+
+    <ul class="notes">
+      <li>[ The register below is a queue, not a history. Only <span style="color:#141414">i</span> has happened. The rest are proposed, with triggers rather than dates, and are meant to be reordered or struck out. ]</li>
+      <li>[ Amendment <span style="color:#141414">v</span> is a deferred sympathy of <span style="color:#141414">iv</span>. It is listed separately on purpose: applying it at the same time would be predicting a failure rather than observing one. ]</li>
+      <li>[ Amendment <span style="color:#141414">vii</span> is constitutional. It breaks the two-tone hold. The recorded objection is that three greys at these values may not be reliably separable, and that a third hand might be better marked by position than by tone. ]</li>
+      <li>[ This page is rendered from the register. The list on the right and the setting on the left are printed from one array, so the document cannot drift from the record it publishes. ]</li>
+      <li>[ Nothing here proposes a change to the rule, the columns, or the graft. Those were locked before the mechanism existed, which is why the mechanism can be this loose. ]</li>
+    </ul>
+
+    <p class="colophon">Amanuensimus &mdash; Phase 0.<br>
+    Register open. Amendments welcome.</p>
+
+  </div>
+
+</main>
+
+<script>
+/* ═══ the single source of truth ═══════════════════════════
+   The page's setting and the printed register are both
+   generated from this array.                              */
+
+var BASE = {
+  '--work-face':"Georgia, 'Times New Roman', Times, serif",
+  '--work-size':'1.0625rem',
+  '--work-lh':'1.72',
+  '--work-gap':'1.15rem',
+  '--work-indent':'0',
+  '--work-align':'left',
+  '--work-hyphens':'manual',
+  '--work-measure':'34rem',
+  '--head-style':'italic',
+  '--head-transform':'none',
+  '--head-track':'.005em',
+  '--head-size':'1.0625rem',
+  '--app-face':"Georgia, 'Times New Roman', Times, serif",
+  '--app-size':'1.0625rem',
+  '--app-lh':'1.72',
+  '--slate':'#737373'
+};
+
+var LEDGER = [
+  {
+    n:'i', title:'As issued',
+    date:'2026-08-16',
+    trigger:'Publication.',
+    reason:'The prose is unvoiced and the page is undesigned. Those are one fact, stated rather than hidden.',
+    sym:null, tier:null,
+    set:{}
+  },
+  {
+    n:'ii', title:'Headings become an interval',
+    date:'unscheduled',
+    trigger:'A second artefact is published.',
+    reason:'One page needs no hierarchy. Two do. An italic line reads as a voice; a letterspaced interval reads as structure, which is what a heading is for.',
+    sym:'head-size, obliged — caps at text size are too loud.',
+    tier:null,
+    set:{'--head-style':'normal','--head-transform':'uppercase','--head-track':'.17em','--head-size':'.72rem'}
+  },
+  {
+    n:'iii', title:'The record stops borrowing the work\u2019s face',
+    date:'unscheduled',
+    trigger:'Provenance rendered by machine rather than by hand.',
+    reason:'While the manifest is hand-authored it is prose. Once it is generated it is output, and should be set as output.',
+    sym:'app-size, obliged — mono sets larger on the body.',
+    tier:null,
+    set:{'--app-face':'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace','--app-size':'.8125rem','--app-lh':'1.75'}
+  },
+  {
+    n:'iv', title:'The work takes a face that is somebody\u2019s',
+    date:'unscheduled',
+    trigger:'Prose measured below the drift threshold against the author\u2019s profile.',
+    reason:'Georgia was chosen for being nobody\u2019s. When the voice stops being nobody\u2019s, the face may follow.',
+    sym:'work-measure — deferred, see v.',
+    tier:null,
+    set:{'--work-face':"Charter, 'Bitstream Charter', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif",'--work-size':'1.13rem','--work-lh':'1.68'}
+  },
+  {
+    n:'v', title:'Measure shortened',
+    date:'unscheduled',
+    trigger:'Two weeks\u2019 reading after iv, if the line runs long.',
+    reason:'Deferred sympathy of iv. Applied on evidence of a failure, not on prediction of one.',
+    sym:null, tier:null,
+    set:{'--work-measure':'31.5rem'}
+  },
+  {
+    n:'vi', title:'Web setting to book setting',
+    date:'unscheduled',
+    trigger:'The first artefact longer than three screens.',
+    reason:'Spaced paragraphs are a scanning affordance. Continuous prose over several screens wants indents and an unbroken column.',
+    sym:'work-hyphens, obliged — justification without hyphenation opens rivers.',
+    tier:null,
+    set:{'--work-indent':'1.35em','--work-gap':'0','--work-align':'justify','--work-hyphens':'auto'}
+  },
+  {
+    n:'vii', title:'A third tone, for the reader\u2019s hand',
+    date:'unscheduled',
+    trigger:'Reader-side tooling exists and puts a third party on the page.',
+    reason:'Two tones are at capacity. A reader\u2019s annotation is neither the author\u2019s hand nor the model\u2019s, and marking it as either would be false.',
+    sym:'no hue holds — the third tone is a third grey, not a colour.',
+    tier:'Constitutional',
+    set:{'--slate':'#A6A6A6'}
+  }
+];
+
+/* ═══ render ═══════════════════════════════════════════════ */
+
+var root = document.documentElement;
+var dial = document.getElementById('dial');
+var cur = document.getElementById('cur');
+var count = document.getElementById('count');
+var tokensEl = document.getElementById('tokens');
+var registerEl = document.getElementById('register');
+
+function esc(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function shorten(v){
+  var s = String(v);
+  return s.length > 34 ? s.slice(0,31).replace(/,\s*$/,'') + '\u2026' : s;
+}
+
+function apply(n){
+  var state = {}, changed = {};
+  Object.keys(BASE).forEach(function(k){ state[k] = BASE[k]; });
+  for (var i = 0; i < n; i++){
+    var a = LEDGER[i];
+    Object.keys(a.set).forEach(function(k){
+      state[k] = a.set[k];
+      if (i === n - 1) changed[k] = true;
+    });
+  }
+  Object.keys(state).forEach(function(k){ root.style.setProperty(k, state[k]); });
+
+  cur.textContent = LEDGER[n-1].n;
+  count.textContent = n + ' of ' + LEDGER.length;
+
+  var lines = ['<span class="lk">columns      two                LOCKED</span>',
+               '<span class="lk">rule         1px #141414        LOCKED</span>',
+               '<span class="lk">graft        #737373            LOCKED</span>',
+               ''];
+  Object.keys(state).forEach(function(k){
+    var name = k.replace('--','');
+    var pad = (name + '            ').slice(0, Math.max(name.length, 13));
+    var val = esc(shorten(state[k]));
+    lines.push('<span class="k">' + pad + '</span>' +
+      (changed[k] ? '<span class="chg">' + val + '</span>' : val));
+  });
+  tokensEl.innerHTML = lines.join('\n');
+
+  Array.prototype.forEach.call(registerEl.children, function(li, i){
+    if (i < n) li.classList.add('on'); else li.classList.remove('on');
+  });
+}
+
+registerEl.innerHTML = LEDGER.map(function(a){
+  var toks = Object.keys(a.set);
+  return '<li>' +
+    '<span class="n">' + a.n + '</span> &nbsp;<span class="t">' + esc(a.title) + '</span>' +
+    (a.tier ? '<span class="flag">' + esc(a.tier) + '</span>' : '') +
+    '<span class="d">' + esc(a.date) + (toks.length ? ' &middot; ' + esc(toks.join(', ').replace(/--/g,'')) : ' &middot; no tokens') + '</span>' +
+    '<span class="con">trigger &mdash; ' + esc(a.trigger) + '</span>' +
+    '<span class="why">reason &mdash; ' + esc(a.reason) + '</span>' +
+    (a.sym ? '<span class="sym">sympathy &mdash; ' + esc(a.sym) + '</span>' : '') +
+  '</li>';
+}).join('');
+
+dial.addEventListener('input', function(){ apply(parseInt(dial.value, 10)); });
+apply(1);
+</script>
+</body>
+</html>
