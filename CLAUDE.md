@@ -32,9 +32,9 @@ Amanuensimus is a framework and toolkit, not a service. It has three intended fo
 
 Relationship with other projects:
 
-- `/opt/claude/stylometry` — historical artefact; measurement math (three-axis, Burrows-Δ, Anna-Wegmann embeddings, register pattern) lifted from here
-- `/opt/claude/support-responder` — downstream domain-specific consumer of the voice-fidelity capability
-- `/opt/claude/hand-rolled-secp256k1-lit-review` — archetype / proof case; the paper is the demonstration this framework generalises. Section 1.2 of `review-final.md` is the canonical disclosure exemplar.
+- `stylometry` — historical artefact; measurement math (three-axis, Burrows-Δ, Anna-Wegmann embeddings, register pattern) lifted from here
+- `support-responder` — downstream domain-specific consumer of the voice-fidelity capability
+- `hand-rolled-secp256k1-lit-review` — archetype / proof case; the paper is the demonstration this framework generalises. Section 1.2 of `review-final.md` is the canonical disclosure exemplar.
 
 ## Directory layout
 

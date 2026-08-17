@@ -58,7 +58,7 @@ The collaboration frame does not lower the accountability bar; it raises it. The
 
 ## The disclosure practice
 
-Baseline reference: **section 1.2 of `/opt/claude/hand-rolled-secp256k1-lit-review/review-final.md`.** The elements that make it exemplary:
+Baseline reference: **section 1.2 of `hand-rolled-secp256k1-lit-review/review-final.md`.** The elements that make it exemplary:
 
 1. Names the specific model and vendor (Claude Opus 4.6, Anthropic 2025–2026)
 2. Distinguishes author work (research questions, source selection methodology, evidence weighting, conclusions) from model work (prose from prompts)

@@ -78,9 +78,9 @@ Under the extended-mind frame, the model is a genuine collaborator — an interi
 
 ## Boundaries with other projects
 
-- **`/opt/claude/stylometry`** — frozen. Math lifted. Do not modify.
-- **`/opt/claude/support-responder`** — downstream consumer. Uses Amanuensimus for voice fidelity in the specific domain of transactional support drafts. Adds ticket state, tenant scoping, macros, edit-delta learning. Not a peer project.
-- **`/opt/claude/hand-rolled-secp256k1-lit-review`** — proof case. The paper (with its section 1.2 disclosure) is the demonstration Amanuensimus generalises. The abandoned first version is the founding case study for the bias-mitigation pillar.
+- **`stylometry`** — frozen. Math lifted. Do not modify.
+- **`support-responder`** — downstream consumer. Uses Amanuensimus for voice fidelity in the specific domain of transactional support drafts. Adds ticket state, tenant scoping, macros, edit-delta learning. Not a peer project.
+- **`hand-rolled-secp256k1-lit-review`** — proof case. The paper (with its section 1.2 disclosure) is the demonstration Amanuensimus generalises. The abandoned first version is the founding case study for the bias-mitigation pillar.
 
 ## Roadmap (lean)
 
@@ -113,7 +113,7 @@ Not "downloads" or "adoption". This is a framework project; success looks like:
 1. **Distribution and licensing.** Is this open-source from day one? Licence choice matters — permissive vs copyleft affects who adopts and how. Also feeds into the trademark question.
 2. **Where does the bias-in-AI-synthesis study live?** Currently pointed at Amanuensimus as founding case study. Alternative: sibling project. Inclination: keep together during formation, split if it grows.
 3. **Reading-side scope.** How far into reading tools does Amanuensimus go before it's a separate project? First cut: as far as it takes to demonstrate the parallel-integrity thesis; beyond that, spin out.
-4. **Multi-author profiles.** Framework is single-author by default. Support-responder needs multi-author (Simon, Sarah, Mariss). Amanuensimus should support this from the start rather than retrofit.
+4. **Multi-author profiles.** Framework is single-author by default. Support-responder needs several author profiles. Amanuensimus should support this from the start rather than retrofit.
 5. **Provenance during private drafting vs published artefact.** How much of the working process is captured? Every session verbatim? Summary manifests? Tension between fidelity and readability of the disclosure.
 6. **Trademark.** Simon has the domains; does he trademark "Amanuensimus"? Depends on distribution model in (1).
 7. **The reader whose norms haven't caught up.** Even with perfect reader-side tooling, mainstream readers won't use it. Does Amanuensimus (or its ETHICS document) speak to the norm-change problem, or only to those already willing?
