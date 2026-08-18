@@ -75,6 +75,10 @@ amanuensimus/
 - **Provenance from line one** — every artefact the toolkit produces carries a machine-readable manifest
 - **Ghostwriter analogy** (not word processor) when framing the project externally
 
+## Git
+
+Push directly to `master` for this repo. The global "all changes via PR" rule is a cross-project default that doesn't suit a solo, fast-moving project — relaxed here, pending the per-project profiles feature.
+
 ## Ethics
 
 Not a separate concern; the primary contribution. See ETHICS.md. Short version: attribution by responsibility, disclosure as non-negotiable practice, reader-side integrity as the missing half of the compact.
