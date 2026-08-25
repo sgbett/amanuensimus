@@ -8,6 +8,7 @@ The execution tracker for Amanuensimus. VISION.md holds the *why* and the four p
 - **Site: live.** amanuensimus.com — the first working demonstration of the disclosure pillar. Public repo (MIT), README, favicon, OG card, footer.
 - **Licence: decided** — MIT (resolves VISION open question 1).
 - **Code: none yet.** The Python package is still target.
+- **2026-08-25:** direction note added — [procedural-abundance.md](procedural-abundance.md), reading Craig Wright's academia essay into the framework. Sharpens the purpose of the reading and writing tools; new items below carry the tag *(PA)*.
 
 ## Pillars — status and next work
 
@@ -19,10 +20,12 @@ Origin: the stylometry enquiry that revealed measurement-alone is insufficient �
 - [ ] Retrieval interface: rank the author's corpus by stylometric similarity, feed top-K as conditioning (`voice.retrieve`).
 - [ ] Grounding experiment (Phase 1): blind-test prompted transfer vs retrieval-augmented few-shot, scored by the diagnostic layer.
 - [ ] Multi-author profiles (needed downstream; see Open decisions).
+- [ ] *(PA)* Directional drift: treat the machine exemplar as a named attractor, not just distance-from-author — drift *toward* it is the failure mode. Fidelity as anti-laundering.
 
 ### 2 · Disclosure integrity — *most-demonstrated, unbuilt as code*
 §1.2 is the exemplar; the site runs a hand-authored version now.
 - [ ] Machine-readable provenance manifest schema.
+- [ ] *(PA)* Schema requirement: task-level AI involvement plus the locus of human verification — "AI was used" is nearly useless (Wright's seventh reform).
 - [ ] Venue renderers (`provenance.render(venue=…)`): academic long-form, professional, popular, transactional.
 - [ ] Verify a rendered disclosure against the §1.2 reference.
 - [ ] Make the site's right column the renderer's first target (currently hand-authored).
@@ -34,8 +37,10 @@ The method comes from the abandoned crypto-review v1; the harness enforces it ra
 - [ ] Case study: apply the harness to the *Bias in AI synthesis* paper.
 
 ### 4 · Reader-side integrity — *specified, least-developed*
-The parallel practice for reading — the fuzziest pillar, even in VISION.
+The parallel practice for reading — the fuzziest pillar, even in VISION. Sharpened considerably by procedural-abundance.md: the reading tool is the driver of the counter-loop, and it routes attention rather than certifying anything.
 - [ ] Reading probe: flag novelty, weak claims, missing citations, structural bias (`reading.probe`).
+- [ ] *(PA)* Negative-inference probe: score deviation from the machine's own exemplar (the `voice.detect_ai` math, inverted), tempered by semantic coherence; patterns in the deviations become attention-routing signals.
+- [ ] *(PA)* Design constraint, load-bearing: the probe emits questions localised to the text, never transferable scores — anti-Campbell by construction. Measurement proposes, dialogue disposes.
 - [ ] Reader-side provenance: record how a work was engaged with (`reading.record`).
 - [ ] Paired reader disclosure templates.
 - [ ] Defensibility-probe: adversarially test your own claims.
@@ -49,7 +54,7 @@ The parallel practice for reading — the fuzziest pillar, even in VISION.
 ## The trilogy
 1. **Bias in AI synthesis** — *planned.* Data: the abandoned crypto-review v1. Sits on the bias pillar.
 2. **The authorship paper** — *done.* The published crypto review; §1.2 is the canonical disclosure. The proof case.
-3. **Reading in the age of collaborative authorship** — *planned.* The reader-side pillar; arguably the most important — the reading norms the other two depend on.
+3. **Reading in the age of collaborative authorship** — *planned.* The reader-side pillar; arguably the most important — the reading norms the other two depend on. Wright (2026) and the audit-culture literature it assembles are source material — see procedural-abundance.md.
 
 ## Site — v2 design backlog
 Explored, reconciled and deferred from v1 (detail in creative-direction.md; raw sketches archived under `design-exploration/`):
@@ -60,6 +65,7 @@ Explored, reconciled and deferred from v1 (detail in creative-direction.md; raw 
 - [ ] Restore the "proof case" door once the crypto review has a public home.
 
 ## Open decisions — gates, not deliverables
+- Proposed amendments from procedural-abundance.md — a new hard non-goal (*not an output multiplier*), anti-laundering purpose stated in VISION pillar 1, the two reader-side design commitments in pillar 4, and a candidate fifth refusal in ETHICS (no certification). Simon to accept or argue with.
 - Multi-author profiles — the downstream consumer needs several authors.
 - Provenance during private drafting vs the published artefact — how much process is captured.
 - Reader-side scope — how far before it becomes a separate project.
