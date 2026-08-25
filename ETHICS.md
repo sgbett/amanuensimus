@@ -110,6 +110,7 @@ Concretely:
 - **Voice cloning without consent.** Voice profiles are built from an author's own corpus with their explicit participation. The framework will not, by default, build a voice profile of a third party from scraped writing.
 - **Manipulation-oriented outputs.** Amanuensimus is not for producing text designed to deceive a specific reader about the author's mental state or expertise. The framework aims at *voice fidelity for legitimate collaboration*, not at *fooling humans for adversarial ends*.
 - **Bad-faith bias mitigation.** The workflow harness enforces evidence-first methodology and session hygiene. Users can technically bypass it, but the framework's default posture treats bypassing as an integrity failure worth flagging.
+- **Measurement rendered as certification.** The framework's instruments are first-person — a reader allocating their own attention, an author rehearsing their own defence. A score offered to an institution as a proxy for judgement is the treadmill of automated production feeding automated evaluation; we decline to build its belt. Measurements route to a human question, never to a spreadsheet cell. (See `docs/procedural-abundance.md`.)
 
 ## The trilogy this framework supports
 

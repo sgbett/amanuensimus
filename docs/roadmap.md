@@ -8,7 +8,7 @@ The execution tracker for Amanuensimus. VISION.md holds the *why* and the four p
 - **Site: live.** amanuensimus.com — the first working demonstration of the disclosure pillar. Public repo (MIT), README, favicon, OG card, footer.
 - **Licence: decided** — MIT (resolves VISION open question 1).
 - **Code: none yet.** The Python package is still target.
-- **2026-08-25:** direction note added — [procedural-abundance.md](procedural-abundance.md), reading Craig Wright's academia essay into the framework. Sharpens the purpose of the reading and writing tools; new items below carry the tag *(PA)*.
+- **2026-08-25:** direction note added — [procedural-abundance.md](procedural-abundance.md), reading Craig Wright's academia essay into the framework. Sharpens the purpose of the reading and writing tools; new items below carry the tag *(PA)*. Its four amendments to CLAUDE/VISION/ETHICS are accepted and landed.
 
 ## Pillars — status and next work
 
@@ -65,13 +65,11 @@ Explored, reconciled and deferred from v1 (detail in creative-direction.md; raw 
 - [ ] Restore the "proof case" door once the crypto review has a public home.
 
 ## Open decisions — gates, not deliverables
-- Proposed amendments from procedural-abundance.md — a new hard non-goal (*not an output multiplier*), anti-laundering purpose stated in VISION pillar 1, the two reader-side design commitments in pillar 4, and a candidate fifth refusal in ETHICS (no certification). Simon to accept or argue with.
 - Multi-author profiles — the downstream consumer needs several authors.
 - Provenance during private drafting vs the published artefact — how much process is captured.
 - Reader-side scope — how far before it becomes a separate project.
 - Trademark "Amanuensimus" — depends on the distribution model.
 - The norm-change problem — readers who won't adopt the tooling.
-- **Public-repo hygiene** — the doc trio (CLAUDE/VISION/ETHICS) names collaborators and references sibling projects and local paths. Decide redact vs accept.
 
 ## Provenance
 Drafted with Simon Bettison in a Claude Code session (Claude Opus 4.8, Anthropic, 17 August 2026), consolidating VISION.md and ETHICS.md into a tracker. A living document — amend it as the work moves.

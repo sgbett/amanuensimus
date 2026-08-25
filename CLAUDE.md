@@ -21,6 +21,7 @@ Zero Google hits at the time of naming. .com/.org/.net registered 2026-07-16.
 - **Not a substitute for reader engagement.** Reader-side tooling is a first-class concern precisely so that AI-assisted reading remains defensible, not so it can replace slow engagement where slow engagement is warranted.
 - **Not neutral about honesty.** The framework encodes a specific ethical position (see ETHICS.md). It does not aim to serve users who want to hide AI collaboration.
 - **Not voice-cloning-as-a-service.** Voice profiles are built from an author's own corpus with their explicit participation. The framework will not, by default, build a voice profile of a third party from scraped writing.
+- **Not an output multiplier.** The writing tools improve artefacts qualitatively; the reading tools absorb the volume that already exists. Neither exists to raise anyone's throughput — a use of the framework that increases output quota is a failure mode, not a success. (See `docs/procedural-abundance.md`.)
 
 ## Architecture
 

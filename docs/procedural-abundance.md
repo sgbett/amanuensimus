@@ -80,12 +80,12 @@ No new pillar; the four stand. Stylometry stays frozen. The institutional reform
 
 Adopted into the roadmap in this commit: the negative-inference probe and the questions-not-scores constraint (pillar 4), directional drift toward the machine attractor (pillar 1), and the disclosure-granularity schema requirements (pillar 2).
 
-Proposed amendments, for Simon to accept or argue with:
+Amendments accepted (Simon, 25 August 2026) and landed in the core docs this pass:
 
-- **CLAUDE.md, hard non-goals** — add: *Not an output multiplier. The writing tools improve artefacts qualitatively; the reading tools absorb volume; neither exists to increase anyone's throughput, and a use of the framework that raises output quota is a failure mode, not a success.*
-- **VISION, pillar 1** — state the anti-laundering purpose explicitly: voice fidelity preserves the diagnostic information that generic polish destroys.
-- **VISION, pillar 4** — state the two design commitments: negative inference rather than value rubrics; questions and attention-routing rather than transferable scores.
-- **ETHICS, "What Amanuensimus refuses"** — candidate fifth refusal: the framework will not render its measurements as certification. Its instruments are first-person; a score offered to an institution as a proxy for judgement is the treadmill, and we decline to build its belt.
+- **CLAUDE.md, hard non-goals** — added *Not an output multiplier*: the writing tools improve artefacts qualitatively; the reading tools absorb volume; neither exists to raise throughput, and a use that increases output quota is a failure mode.
+- **VISION, pillar 1** — anti-laundering stated explicitly: voice fidelity preserves the diagnostic information generic polish destroys, and drift *toward* the machine register is the failure mode that matters.
+- **VISION, pillar 4** — the two design commitments stated: negative inference rather than value rubrics; questions and attention-routing rather than transferable scores.
+- **ETHICS, "What Amanuensimus refuses"** — fifth refusal added: the framework will not render its measurements as certification.
 
 ## Provenance
 

@@ -24,6 +24,8 @@ AI-generated prose that preserves the author's voice, verified by measurement. N
 - **Constrained decoding** — hard-enforce lexical constraints (British spelling, forbidden phrases, function-word frequency bands)
 - **Drift measurement** — score generated output against author profile; alert on divergence; guide iteration
 
+The purpose is anti-laundering, not vanity. Generic AI polish strips the diagnostic signal — a weak idea given excellent grammar, an invalid one a paragraph of caveats; a confused methods section that once *sounded* confused now reads clean. A voice-faithful rendering preserves that signal: if the thinking is confused, the prose stays legibly confused. So drift *toward* the machine's fluent, neutral register — not merely distance from the author — is the failure mode that matters, and fidelity will sometimes mean text measurably worse on the axes an LLM optimises for. Fidelity is the commitment not to let the model's fluency stand in for thinking that didn't happen. (See `docs/procedural-abundance.md`.)
+
 Owns and exposes: `voice.retrieve()`, `voice.measure()`, `voice.detect_ai()` — the last being the diagnostic capability from stylometry, used as self-check on generated output.
 
 ### 2. Disclosure integrity
@@ -55,6 +57,8 @@ The parallel responsibility frame for AI-assisted reading. Without it, the autho
 - **Reader-side provenance** — record how a work was engaged with (direct read? summary? adversarial probe?)
 - **Reader disclosure templates** — paired with author-side templates; when citing a work read with AI assistance, disclose the mode of engagement
 - **Defensibility-probe tooling** — adversarially test your own claims to confirm you can defend them under questioning you didn't rehearse for
+
+Two design commitments, load-bearing. The probe works by *negative inference* — occluding machine-typical value rather than rubricking human value, because the things that matter (spotting that a standard model is wrong, designing a decisive test, knowing the output is nonsense) are precisely what cannot be rubric'd. And it emits *questions localised to the text*, never transferable scores: measurement proposes, dialogue disposes. A reading tool whose output became a number an institution could put in a spreadsheet would *be* the machine-readable criterion of the treadmill it exists to break. (See `docs/procedural-abundance.md`.)
 
 Owns and exposes: `reading.probe()`, `reading.summarise()`, `reading.record()`.
 
